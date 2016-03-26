@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
@@ -12,9 +13,18 @@ type MyController struct {
 	beego.Controller
 }
 
-func (c *MyController) Get() {
-	c.TplName = "a/index.tpl"
+func (this *MyController) Get() {
+	this.TplName = "index.html"
+	CriarDados()
+	this.Render()
 
+}
+
+func (c *MyController) Post() {
+	c.TplName = "a/b.tpl"
+}
+
+func CriarDados() {
 	o := orm.NewOrm()
 	o.Insert(&models.Curso{Nome: "curso01"})
 	o.Insert(&models.Curso{Nome: "curso02"})
@@ -78,8 +88,4 @@ func (c *MyController) Get() {
 	//fmt.Printf("pessoa lida: ")
 	//fmt.Println(p)
 
-}
-
-func (c *MyController) Post() {
-	c.TplName = "a/b.tpl"
 }

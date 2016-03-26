@@ -7,5 +7,6 @@ import (
 
 func init() {
 	beego.Router("/", &controllers.MyController{})
+	beego.Router("/pessoas/", &controllers.ListaPessoaController{}, "get:PegarPessoas;post:CadastrarPessoa")
 
 }

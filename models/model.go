@@ -5,14 +5,12 @@ import (
 )
 
 type Pessoa struct {
-	Id    uint
-	Nome  string
-	Email string
-}
-
-type Curso struct {
-	Id   uint
-	Nome string
+	Id       uint
+	Nome     string
+	Telefone string
+	Email    string
+	Cadastro string
+	Senha    string
 }
 
 type Aluno struct {
@@ -25,10 +23,16 @@ type Aluno struct {
 }
 
 type Prof struct {
+	Id         uint
+	Pessoa     *Pessoa `orm:"rel(fk)"`
+	Curso      *Curso  `orm:"rel(fk)"`
+	Seap       string
+	Privilegio uint
+}
+
+type Documento struct {
 	Id     uint
-	Pessoa *Pessoa `orm:"rel(fk)"`
-	Curso  *Curso  `orm:"rel(fk)"`
-	Codigo uint
+	Titulo string
 }
 
 type Coord struct {
@@ -37,15 +41,36 @@ type Coord struct {
 }
 
 type Estagio struct {
-	Id    uint
-	Aluno *Aluno `orm:"rel(fk)"`
-	Prof  *Prof  `orm:"rel(fk)"`
+	Id              uint
+	Aluno           *Aluno `orm:"rel(fk)"`
+	Prof            *Prof  `orm:"rel(fk)"`
+	LocalFis        string
+	Obrigatoriedade bool
+	DataInicio      string
+	DataFim         string
+}
+
+type Estagio_Documento struct {
+	Id        uint
+	Estagio   *Estagio   `orm:"rel(fk)"`
+	Documento *Documento `orm:"rel(fk)"`
+	//Arquivo *FILE
+	DataEntrega string
+}
+
+type Curso struct {
+	Id                  uint
+	Nome                string
+	CHObrigatoria       uint
+	CHNObrigatoria      uint
+	PeriodoNObrigatorio uint
+	PeriodoObrigatorio  uint
 }
 
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", "root:estagio123@/my_db?charset=utf8", 30)
-	orm.RegisterModel(new(Pessoa), new(Curso), new(Aluno), new(Prof), new(Coord), new(Estagio))
+	orm.RegisterModel(new(Pessoa), new(Curso), new(Aluno), new(Prof), new(Coord), new(Estagio), new(Documento), new(Estagio_Documento))
 	orm.RunSyncdb("default", true, true)
 }
 
