@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app>
+
+<head>
+  <title>Portal do Estagio</title>
+  <script src='/static/js/angular.min.js'></script>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+  <script src='/static/js/login.js'></script>
+  <link rel='stylesheet' href='/static/css/pessoas.css'>
+</head>
+
+<body>
+<div class='container' ng-controller='LoginCtrl'>
+  <h1 class='charcoal rounded-box'>Login</h1>
+
+  <form>
+    <input type='text' class='rounded-box' placeholder='Email' ng-model='emailText'>
+      <br>
+    <input type='text' class='rounded-box' placeholder='Senha' ng-model='senhaText'>
+    <br>
+    <br>
+    <button class='grey rounded-box' ng-click='Entrar()' ng-disabled='working'>Entrar</button>
+  </form>
+
+  <img class='spinner' src='/static/img/spinner.gif' alt='Loading' ng-class='{working: working}'/>
+</div>
+</body>
+</html>

@@ -4,30 +4,36 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
+type Conta struct {
+	Id      uint
+	Pessoa  *Pessoa `orm:"rel(one)"`
+	Usuario string
+	Senha   string
+}
+
 type Pessoa struct {
-	Id       uint
-	Nome     string
-	Telefone string
-	Email    string
-	Cadastro string
-	Senha    string
+	Id         uint
+	Conta      *Conta `orm:"null;reverse(one)"`
+	Nome       string
+	Telefone   string
+	Email      string `orm:"unique"`
+	Privilegio int    // 0-supervisor/anonimo 1-aluno 2-professor 3-coord-curso 4-admin
 }
 
 type Aluno struct {
 	Id           uint
-	Pessoa       *Pessoa `orm:"rel(fk)"`
-	Ra           uint
+	Conta        *Conta `orm:"rel(fk)"`
+	Ra           uint   `orm:"unique"`
 	Curso        *Curso `orm:"rel(fk)"`
 	Periodo      uint
 	CargaHoraria uint
 }
 
-type Prof struct {
-	Id         uint
-	Pessoa     *Pessoa `orm:"rel(fk)"`
-	Curso      *Curso  `orm:"rel(fk)"`
-	Seap       string
-	Privilegio uint
+type Professor struct {
+	Id    uint
+	Conta *Conta `orm:"rel(fk)"`
+	Curso *Curso `orm:"rel(fk)"`
+	Seap  string `orm:"unique"`
 }
 
 type Documento struct {
@@ -36,14 +42,14 @@ type Documento struct {
 }
 
 type Coord struct {
-	Id     uint
-	Pessoa *Pessoa `orm:"rel(fk)"`
+	Id    uint
+	Conta *Conta `orm:"rel(fk)"`
 }
 
 type Estagio struct {
 	Id              uint
-	Aluno           *Aluno `orm:"rel(fk)"`
-	Prof            *Prof  `orm:"rel(fk)"`
+	Aluno           *Aluno     `orm:"rel(fk)"`
+	Professor       *Professor `orm:"rel(fk)"`
 	LocalFis        string
 	Obrigatoriedade bool
 	DataInicio      string
@@ -60,7 +66,7 @@ type Estagio_Documento struct {
 
 type Curso struct {
 	Id                  uint
-	Nome                string
+	Nome                string `orm:"unique"`
 	CHObrigatoria       uint
 	CHNObrigatoria      uint
 	PeriodoNObrigatorio uint
@@ -70,26 +76,38 @@ type Curso struct {
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", "root:estagio123@/my_db?charset=utf8", 30)
-	orm.RegisterModel(new(Pessoa), new(Curso), new(Aluno), new(Prof), new(Coord), new(Estagio), new(Documento), new(Estagio_Documento))
+	orm.RegisterModel(new(Conta), new(Pessoa), new(Curso), new(Aluno), new(Professor), new(Coord), new(Estagio), new(Documento), new(Estagio_Documento))
 	orm.RunSyncdb("default", true, true)
 }
 
-func (p *Prof) GetEstagios() (estagios []*Estagio, err error) {
+func (p *Professor) GetEstagios() (estagios []*Estagio, err error) {
 	//var estagios []*Estagio
 	o := orm.NewOrm()
 	qs := o.QueryTable("estagio")
-	_, err = qs.Filter("Prof", p.Id).RelatedSel().All(&estagios)
+	_, err = qs.Filter("Professor", p.Id).RelatedSel().All(&estagios)
 
 	/*for _, estagio := range estagios {
-		fmt.Printf("Id: %d, ", estagio.Id, estagio.Aluno, estagio.Prof)
+		fmt.Printf("Id: %d, ", estagio.Id, estagio.Aluno, estagio.Professor)
 	}*/
 	return
 }
 
-func GetProfs() (profs []*Prof, err error) {
+func (a *Aluno) GetEstagios() (estagios []*Estagio, err error) {
+	//var estagios []*Estagio
 	o := orm.NewOrm()
-	qs := o.QueryTable("prof")
-	_, err = qs.All(&profs)
+	qs := o.QueryTable("estagio")
+	_, err = qs.Filter("Aluno", a.Id).RelatedSel().All(&estagios)
+
+	/*for _, estagio := range estagios {
+		fmt.Printf("Id: %d, ", estagio.Id, estagio.Aluno, estagio.Professor)
+	}*/
+	return
+}
+
+func GetProfessores() (professores []*Professor, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable("professor")
+	_, err = qs.All(&professores)
 	return
 }
 

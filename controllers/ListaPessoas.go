@@ -48,6 +48,9 @@ func (this *ListaPessoaController) CadastrarPessoa() {
 
 		return
 	}
-	o.Insert(&models.Pessoa{Nome: dado.Nome, Email: dado.Email, Telefone: dado.Telefone, Senha: dado.Nome + "0", Cadastro: dado.Email})
+	p := &models.Pessoa{Nome: dado.Nome, Email: dado.Email, Telefone: dado.Telefone}
+	c := &models.Conta{Pessoa: p, Usuario: p.Email, Senha: p.Nome + "_"}
+	o.Insert(p)
+	o.Insert(c)
 	//fmt.Println(dado.Nome)
 }
