@@ -4,7 +4,7 @@
  license that can be found in the LICENSE file.
 */
 
-function LoginCtrl($scope, $http) {
+function LoginCtrl($scope, $http, $window) {
   $scope.working = false;
 
   var logError = function(data, status) {
@@ -17,11 +17,25 @@ function LoginCtrl($scope, $http) {
 
     $http.post('/login', {Email: $scope.emailText, Senha: $scope.senhaText}).
       error(logError).
-      success(function() {
-        
+      success(function(st) {
+          $scope.st = st.Status;
           $scope.working = false;
-          $scope.emailText = '';
-          $scope.senhaText = '';
+          
+          switch (st.Status) {
+           case "ok":
+              $window.location.href = '/';
+            break;
+           case "err_usuario_inexiste":
+
+            break;
+           case "err_senha_invalida":
+
+            break;
+
+          }
+
+          //$scope.emailText = '';
+          //$scope.senhaText = '';
         
       });
   };

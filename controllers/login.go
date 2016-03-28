@@ -40,19 +40,19 @@ func (this *LoginController) Post() {
 	//dado.Senha = buffer.String()
 
 	//o := orm.NewOrm()
-	erro := struct{ erro string }{""}
+	status := struct{ Status string }{""}
 	//var conta models.Conta = models.Conta{Usuario: dado.Email}
 	var conta models.Conta = models.Conta{}
 	o := orm.NewOrm()
 	o.QueryTable("conta").Filter("Usuario", dado.Email).RelatedSel().One(&conta)
 	//err = o.Read(&conta, "Usuario")
 	if err == orm.ErrNoRows {
-		erro.erro = "Usuario inexistente!"
+		status.Status = "err_usuario_inexiste"
 		fmt.Println("Usuario nao cadastrado!")
 	} else if dado.Senha != conta.Senha {
 		fmt.Println("usuario nao logado!")
 		fmt.Printf("%s nao bate com %s!\n", dado.Senha, conta.Senha)
-		erro.erro = "algo deu errado"
+		status.Status = "err_senha_invalida"
 	} else {
 		//Set the session successful login
 		sess := this.StartSession()
@@ -86,12 +86,13 @@ func (this *LoginController) Post() {
 			break
 		}
 		fmt.Println("usuario logado!")
-		this.Ctx.Redirect(302, "/")
-		return
+		status.Status = "ok"
+		//this.Ctx.Redirect(302, "/")
+		//return
 	}
 
 	// erro
-	this.Data["json"] = erro
+	this.Data["json"] = status
 	this.ServeJSON()
 }
 

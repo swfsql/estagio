@@ -19,7 +19,10 @@ func (this *IndexController) Get() {
 	//defer sess.SessionRelease()
 
 	if conta, achou := sess.Get("conta").(models.Conta); achou == false { // nao esta logado
-		this.TplName = "login.html"
+		//this.TplName = "login.html"
+		//this.Ctx.Redirect(302, "/login")
+		this.Redirect("/login", 302)
+		return
 	} else { // esta logado
 		//pessoa := models.Pessoa{Nome: pessoa.Nome, Telefone: pessoa.Telefone, Email: pessoa.Email, Privilegio: pessoa.Privilegio}
 		this.Data["pessoa"] = conta.Pessoa
@@ -55,7 +58,8 @@ type PopularController struct {
 
 func (this *PopularController) Get() {
 	CriarDados()
-	this.Ctx.Redirect(302, "/")
+	//this.Ctx.Redirect(302, "/")
+	this.Redirect("/", 302)
 }
 
 func CriarDados() {
