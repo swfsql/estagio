@@ -10,6 +10,12 @@ import (
 	"github.com/swfsql/estagio/models"
 )
 
+var (
+	st_ok                   string = "ok"
+	st_err_usuario_inexiste string = "err_usuario_inexiste"
+	st_err_senha_invalida   string = "err_senha_invalida"
+)
+
 type LoginController struct {
 	beego.Controller
 }
@@ -39,61 +45,60 @@ func (this *LoginController) Post() {
 	//fmt.Fprintf(buffer, "%x", md5senha.Sum(nil))
 	//dado.Senha = buffer.String()
 
-	//o := orm.NewOrm()
 	status := struct{ Status string }{""}
-	//var conta models.Conta = models.Conta{Usuario: dado.Email}
+	this.Data["json"] = status
+
 	var conta models.Conta = models.Conta{}
 	o := orm.NewOrm()
 	o.QueryTable("conta").Filter("Usuario", dado.Email).RelatedSel().One(&conta)
-	//err = o.Read(&conta, "Usuario")
+
 	if err == orm.ErrNoRows {
-		status.Status = "err_usuario_inexiste"
-		fmt.Println("Usuario nao cadastrado!")
-	} else if dado.Senha != conta.Senha {
-		fmt.Println("usuario nao logado!")
-		fmt.Printf("%s nao bate com %s!\n", dado.Senha, conta.Senha)
-		status.Status = "err_senha_invalida"
-	} else {
-		//Set the session successful login
-		sess := this.StartSession()
-		//sess := globalSessions.SessionStart(this.Ctx.ResponseWriter, this.Ctx.Request)
+		status.Status = st_err_usuario_inexiste
+		this.ServeJSON()
+		return
 
-		sess.Set("conta", conta)
-		fmt.Println(conta.Pessoa.Privilegio)
-		fmt.Println(conta.Pessoa.Nome)
-		switch conta.Pessoa.Privilegio {
-		case 2: // aluno
-			var aluno models.Aluno
-			o.QueryTable("aluno").Filter("Conta", conta.Id).RelatedSel().One(&aluno)
-			estagios, _ := aluno.GetEstagios()
-			sess.Set("aluno", aluno)
-			sess.Set("estagios", estagios)
-			break
-		case 3: // professor
-			var professor models.Professor
-			sess.Set("professor", professor)
-			// pegar estagios
-			// ...
-			break
-		case 4: // coord curso
-			// pegar estagios
-			// ...
-			break
-		case 5: // admin
-			// ...
-			break
-
-			break
-		}
-		fmt.Println("usuario logado!")
-		status.Status = "ok"
-		//this.Ctx.Redirect(302, "/")
-		//return
 	}
 
-	// erro
-	this.Data["json"] = status
+	if dado.Senha != conta.Senha {
+		fmt.Printf("%s nao bate com %s!\n", dado.Senha, conta.Senha)
+		status.Status = st_err_senha_invalida
+		this.ServeJSON()
+		return
+
+	}
+
+	status.Status = st_ok
+	sess := this.StartSession()
+	sess.Set("conta", conta)
+
+	switch conta.Pessoa.Privilegio {
+
+	case 2: // aluno
+		var aluno models.Aluno
+		o.QueryTable("aluno").Filter("Conta", conta.Id).RelatedSel().One(&aluno)
+		estagios, _ := aluno.GetEstagios()
+		sess.Set("aluno", aluno)
+		sess.Set("estagios", estagios)
+		break
+
+	case 3: // professor
+		var professor models.Professor
+		sess.Set("professor", professor)
+		// pegar estagios
+		// ...
+		break
+
+	case 4: // coord curso
+		// pegar estagios
+		// ...
+		break
+
+	case 5: // admin
+		// ...
+		break
+	}
 	this.ServeJSON()
+
 }
 
 type RegisterController struct {

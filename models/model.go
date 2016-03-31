@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -20,6 +21,10 @@ type Pessoa struct {
 	Privilegio int    // 0-supervisor/anonimo 1-aluno 2-professor 3-coord-curso 4-admin
 }
 
+func (s Pessoa) String() string {
+	return fmt.Sprintf("(pessoa .Id: %d, .Conta: (conta), .Nome: %s, .Telefone: %s, .Email: %s, .Privilegio: %d)", s.Id, s.Nome, s.Telefone, s.Email, s.Privilegio)
+}
+
 type Aluno struct {
 	Id           uint
 	Conta        *Conta `orm:"rel(fk)"`
@@ -29,6 +34,10 @@ type Aluno struct {
 	CargaHoraria uint
 }
 
+func (s Aluno) String() string {
+	return fmt.Sprintf("(aluno .Id: %d, .Conta: (conta), .Ra: %d, .Curso: (curso), .Periodo: %d, .CargaHoraria: %d)", s.Id, s.Ra, s.Periodo, s.CargaHoraria)
+}
+
 type Professor struct {
 	Id    uint
 	Conta *Conta `orm:"rel(fk)"`
@@ -36,14 +45,17 @@ type Professor struct {
 	Seap  string `orm:"unique"`
 }
 
+func (s Professor) String() string {
+	return fmt.Sprintf("(professor .Id: %d, .Conta: (conta), .Curso: (curso), .Seap: %s)", s.Id, s.Seap)
+}
+
 type Documento struct {
 	Id     uint
 	Titulo string
 }
 
-type Coord struct {
-	Id    uint
-	Conta *Conta `orm:"rel(fk)"`
+func (s Documento) String() string {
+	return fmt.Sprintf("(documento .Id: %d, .Titulo: %s)", s.Id, s.Titulo)
 }
 
 type Estagio struct {
@@ -56,12 +68,20 @@ type Estagio struct {
 	DataFim         string
 }
 
+func (s Estagio) String() string {
+	return fmt.Sprintf("(estagio .Id: %d, .Aluno: (aluno), .Professor: (professor), .LocalFis: %s, .Obrigatoriedade: %t, .DataInicio: %s, .DataFim: %s)", s.Id, s.LocalFis, s.Obrigatoriedade, s.DataInicio, s.DataFim)
+}
+
 type Estagio_Documento struct {
 	Id        uint
 	Estagio   *Estagio   `orm:"rel(fk)"`
 	Documento *Documento `orm:"rel(fk)"`
 	//Arquivo *FILE
 	DataEntrega string
+}
+
+func (s Estagio_Documento) String() string {
+	return fmt.Sprintf("(estagio_documento .Id: %d, .Estagio: (estagio), .Documento: (documento), .DataEntrega: %s)", s.Id, s.DataEntrega)
 }
 
 type Curso struct {
@@ -73,10 +93,14 @@ type Curso struct {
 	PeriodoObrigatorio  uint
 }
 
+func (s Curso) String() string {
+	return fmt.Sprintf("(curso .Id: %d, .Nome: %s, .CHObrigatoria: %d, .CHNObrigatoria: %d, .PeriodoNObrigatorio: %d, .PeriodoObrigatorio: %d)", s.Id, s.Nome, s.CHObrigatoria, s.CHNObrigatoria, s.PeriodoNObrigatorio, s.PeriodoObrigatorio)
+}
+
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", "root:estagio123@/my_db?charset=utf8", 30)
-	orm.RegisterModel(new(Conta), new(Pessoa), new(Curso), new(Aluno), new(Professor), new(Coord), new(Estagio), new(Documento), new(Estagio_Documento))
+	orm.RegisterModel(new(Conta), new(Pessoa), new(Curso), new(Aluno), new(Professor), new(Estagio), new(Documento), new(Estagio_Documento))
 	orm.RunSyncdb("default", true, true)
 }
 
