@@ -17,11 +17,14 @@ var (
 )
 
 type LoginController struct {
-	beego.Controller
+	BaseController
 }
 
 func (this *LoginController) Get() {
 	this.TplName = "login.html"
+	this.Data["Title"] = "Login Title"
+	this.Data["HeadScripts"] = []string{"/static/js/login.js"}
+	this.Data["HeadStyles"] = []string{"/static/css/login.css"}
 	this.Render()
 }
 
