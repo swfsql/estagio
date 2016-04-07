@@ -46,7 +46,6 @@ func (this *LoginController) Post() {
 	//dado.Senha = buffer.String()
 
 	status := struct{ Status string }{""}
-	this.Data["json"] = status
 
 	var conta models.Conta = models.Conta{}
 	o := orm.NewOrm()
@@ -54,6 +53,7 @@ func (this *LoginController) Post() {
 
 	if err == orm.ErrNoRows {
 		status.Status = st_err_usuario_inexiste
+		this.Data["json"] = status
 		this.ServeJSON()
 		return
 
@@ -62,12 +62,12 @@ func (this *LoginController) Post() {
 	if dado.Senha != conta.Senha {
 		fmt.Printf("%s nao bate com %s!\n", dado.Senha, conta.Senha)
 		status.Status = st_err_senha_invalida
+		this.Data["json"] = status
 		this.ServeJSON()
 		return
 
 	}
 
-	status.Status = st_ok
 	sess := this.StartSession()
 	sess.Set("conta", conta)
 
@@ -97,6 +97,8 @@ func (this *LoginController) Post() {
 		// ...
 		break
 	}
+	status.Status = st_ok
+	this.Data["json"] = status
 	this.ServeJSON()
 
 }
