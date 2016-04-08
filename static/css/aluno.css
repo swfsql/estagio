@@ -1,0 +1,85 @@
+body {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: white;
+
+  background-image: url(../img/unifei.jpg);
+  background-position: 30px 30px;
+  background-repeat: no-repeat;
+  background-size: 10%;
+}
+
+.header,
+.marketing,
+.footer {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.jumbotron {
+  border: 1px solid black;
+  padding: 10px 10px;
+}
+
+#bemvindo{
+  color:black;
+}
+
+.header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  color: black;
+}
+
+.footer {
+  padding-top: 20px;
+  color: black;
+  border-top: 1px solid #e5e5e5;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 35px 0;
+}
+
+.estagio {
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+.estagio .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+ 
+}
