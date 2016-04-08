@@ -28,23 +28,23 @@ func CriarDados() {
 	}
 	for i := 0; i < 5; i++ {
 		s := strconv.Itoa(i)
-		o.Insert(&models.Pessoa{Nome: "supervisorEmpresa" + s, Privilegio: 1, Email: "supervisor@" + s})
+		o.Insert(&models.Pessoa{Nome: "supervisorEmpresa" + s, Privilegio: 1, Email: "supervisor@" + s + ".com"})
 	}
 	for i := 0; i < 5; i++ {
 		s := strconv.Itoa(i)
-		o.Insert(&models.Pessoa{Nome: "aluno" + s, Privilegio: 2, Email: "aluno@" + s})
+		o.Insert(&models.Pessoa{Nome: "aluno" + s, Privilegio: 2, Email: "aluno@" + s + ".com"})
 	}
 	for i := 0; i < 5; i++ {
 		s := strconv.Itoa(i)
-		o.Insert(&models.Pessoa{Nome: "professor" + s, Privilegio: 3, Email: "professor@" + s})
+		o.Insert(&models.Pessoa{Nome: "professor" + s, Privilegio: 3, Email: "professor@" + s + ".com"})
 	}
 	for i := 0; i < 5; i++ {
 		s := strconv.Itoa(i)
-		o.Insert(&models.Pessoa{Nome: "coord" + s, Privilegio: 4, Email: "coord@" + s})
+		o.Insert(&models.Pessoa{Nome: "coord" + s, Privilegio: 4, Email: "coord@" + s + ".com"})
 	}
 	for i := 0; i < 5; i++ {
 		s := strconv.Itoa(i)
-		o.Insert(&models.Pessoa{Nome: "admin" + s, Privilegio: 5, Email: "admin@" + s})
+		o.Insert(&models.Pessoa{Nome: "admin" + s, Privilegio: 5, Email: "admin@" + s + ".com"})
 	}
 
 	var pessoas []*models.Pessoa
@@ -80,9 +80,9 @@ func CriarDados() {
 	qs = o.QueryTable("professor")
 	qs.All(&professores)
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		fmt.Println(i)
-		o.Insert(&models.Estagio{Aluno: alunos[i], Professor: professores[i%3]})
+		o.Insert(&models.Estagio{Aluno: alunos[i%5], Professor: professores[i%3]})
 	}
 
 	var estagios []*models.Estagio

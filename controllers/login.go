@@ -17,11 +17,14 @@ var (
 )
 
 type LoginController struct {
-	beego.Controller
+	BaseController
 }
 
 func (this *LoginController) Get() {
 	this.TplName = "login.html"
+	this.Data["HeadTitle"] = "Login Title"
+	this.Data["HeadScripts"] = []string{"/static/js/login.js"}
+	this.Data["HeadStyles"] = []string{"/static/css/login.css"}
 	this.Render()
 }
 
@@ -38,6 +41,8 @@ func (this *LoginController) Post() {
 		this.Ctx.Output.Body([]byte("JSON invalido"))
 		return
 	}
+
+	fmt.Println(dado)
 
 	//md5senha := md5.New()
 	//io.WriteString(md5senha, dado.Senha)
@@ -58,6 +63,8 @@ func (this *LoginController) Post() {
 		return
 
 	}
+
+	fmt.Println(conta)
 
 	if dado.Senha != conta.Senha {
 		fmt.Printf("%s nao bate com %s!\n", dado.Senha, conta.Senha)
