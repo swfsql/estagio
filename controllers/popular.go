@@ -80,9 +80,9 @@ func CriarDados() {
 	qs = o.QueryTable("professor")
 	qs.All(&professores)
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		fmt.Println(i)
-		o.Insert(&models.Estagio{Aluno: alunos[i], Professor: professores[i%3]})
+		o.Insert(&models.Estagio{Aluno: alunos[i%5], Professor: professores[i%3]})
 	}
 
 	var estagios []*models.Estagio
