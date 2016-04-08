@@ -9,6 +9,10 @@ import (
 	"github.com/swfsql/estagio/models"
 )
 
+type PopularController struct {
+	BaseController
+}
+
 func (this *PopularController) Get() {
 	CriarDados()
 	//this.Ctx.Redirect(302, "/")

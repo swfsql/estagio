@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/astaxie/beego"
 	"github.com/swfsql/estagio/models"
 )
 
@@ -43,8 +42,4 @@ func (this *IndexController) Get() {
 	fmt.Println(this.TplName)
 	this.All()
 	this.Render()
-}
-
-type PopularController struct {
-	beego.Controller
 }
