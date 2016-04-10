@@ -5,16 +5,16 @@ Trabalho em grupo da disciplina ECO037 - Interface Humano-Computador da Unifei-I
 
 ## Ubuntu
 Instale e configure o git:
-# apt-get install git
+`# apt-get install git
 $ git config --global user.email "seu_email@sei_la.com"
-$ git config --global user.name "Seu Nome Completo"
+$ git config --global user.name "Seu Nome Completo"`
 
 Instale o mysql e configure a senha de root para estagio123:
-# apt-get install mysql-server
+`# apt-get install mysql-server`
 (Opcional) Deixe o seu mysql mais seguro:
-# mysql_secure_installation
+`# mysql_secure_installation`
 (Re)inicie o serviço do BD:
-# service mysql restart
+`# service mysql restart`
 
 Instale o [golang](https://github.com/golang/go/wiki/Ubuntu).
 [Configure o GOPATH](https://stackoverflow.com/questions/21001387/how-do-i-set-the-gopath-environment-variable-on-ubuntu-what-file-must-i-edit) e dê logout e login no mesmo usuário.
@@ -37,20 +37,17 @@ No Ubuntu, desligue a máquina.
 No windows, [configure uma pasta compartilhada](http://www.htpcbeginner.com/setup-virtualbox-shared-folders-linux-windows/).
 No Ubuntu, [configure a pasta compartilhada](http://www.htpcbeginner.com/mount-virtualbox-shared-folder-on-ubuntu-linux/).
 No Ubuntu, mova o projeto para a pasta compartilhada:
-$ mv $GOPATH/src/github.com/swfsql/estagio/\* SUA_PASTA_COMPARTILHADA_NO_UBUNTU
+`$ mv $GOPATH/src/github.com/swfsql/estagio/\* SUA_PASTA_COMPARTILHADA_NO_UBUNTU
 $ mv $GOPATH/src/github.com/swfsql/estagio/.\* SUA_PASTA_COMPARTILHADA_NO_UBUNTU
-$ rmdir $GOPATH/src/github.com/swfsql/estagio
-$ rm estagio
+$ rmdir $GOPATH/src/github.com/swfsql/estagio`
+$ rm estagio`
 Crie um atalho para a nova localização da pasta do projeto
-$ ln -s SUA_PASTA_COMPARTILHADA ~/estagio
-$ ln -s SUA_PASTA_COMPARTILHADA_NO_UBUNTU $GOPATH/src/github.com/swfsql/estagio
- 
+`$ ln -s SUA_PASTA_COMPARTILHADA ~/estagio
+$ ln -s SUA_PASTA_COMPARTILHADA_NO_UBUNTU $GOPATH/src/github.com/swfsql/estagio`
 
 #### Acessar o site pelo Windows
 No Ubuntu, desligue a máquina.
 No Windows, [configure a conexão do guest](https://askubuntu.com/questions/52147/how-can-i-access-apache-on-virtualbox-guest-from-host). Você não precisa mudar o C:\\\\Windows\drivers\etc\host pois é possível acessar o site pelo ip:porta.
-
-
 
 ## Arch
 Instale o [git](https://wiki.archlinux.org/index.php/git), e configure-o.
@@ -63,33 +60,33 @@ Siga as instruções de configuração do MYSQL e GO.
 # Configuração
 
 ## MYSQL
-$ mysql -u root -p
+`$ mysql -u root -p
 mysql> CREATE DATABASE my_db;	
-mysql> quit;
+mysql> quit;`
 
 ## GO
-$ go get github.com/beego/bee
-$ go get github.com/swfsql/estagio
+`$ go get github.com/beego/bee
+$ go get github.com/swfsql/estagio`
 
 
 # Execução
 Crie um atalho para o diretório do projeto:
-$ ln -s $GOPATH/src/github.com/swfsql/estagio ~/estagio
+`$ ln -s $GOPATH/src/github.com/swfsql/estagio ~/estagio`
 Entre no diretório:
-$ cd estagio
+`$ cd estagio`
 Execute o servidor:
-$ bee run
+`$ bee run`
 
 ## Linux
 Com um navegador, acesse:
-localhost:8080
+`localhost:8080`
 
 Para popular o BD, acesse:
-localhost:8080/popular
+`localhost:8080/popular`
 
 Então de login como aluno1:
-Login: aluno@1.com
-Senha: aluno1\_
+Login: `aluno@1.com`
+Senha: `aluno1\_`
 
 ## Windows
 ### Servidor no VirtualBox
