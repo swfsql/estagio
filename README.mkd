@@ -55,8 +55,7 @@ No Windows, [configure a conexão do guest](https://askubuntu.com/questions/5214
 ## Arch
 Instale o [git](https://wiki.archlinux.org/index.php/git), e configure-o.
 Instale o [mysql](https://wiki.archlinux.org/index.php/MySQL) e configure a senha do root para estagio123.
-Inicie o serviço do BD:
-# systemctl start mysqld.service
+Inicie o serviço do BD: `# systemctl start mysqld.service`
 Instale o [go](https://wiki.archlinux.org/index.php/Go) e configure o GOPATH.
 No Ubuntu, siga as instruções de *Configuração* > *MYSQL* e *GO*
 
