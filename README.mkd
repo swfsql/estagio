@@ -4,41 +4,32 @@ Trabalho em grupo da disciplina ECO037 - Interface Humano-Computador da Unifei-I
 # Instalação
 
 ## Ubuntu
-Instale e configure o git:
+Instale e configure o *git*:
 ```console
 # apt-get install git
 $ git config --global user.email "seu_email@sei_la.com"
 $ git config --global user.name "Seu Nome Completo"
 ```
 
-Instale o mysql e configure a senha de root para estagio123:
-```console
-# apt-get install mysql-server
-```
-(Opcional) Deixe o seu mysql mais seguro:
-```console
-# mysql_secure_installation
-```
-(Re)inicie o serviço do BD:
-```console
-# service mysql restart
-```
+Instale o *mysql* e configure a senha de root para *estagio123*: `# apt-get install mysql-server`
+Você pode optar por deixar o seu mysql mais seguro com `# mysql_secure_installation`
+(Re)inicie o serviço do BD: `# service mysql restart`
 
 Instale o [golang](https://github.com/golang/go/wiki/Ubuntu).
 [Configure o GOPATH](https://stackoverflow.com/questions/21001387/how-do-i-set-the-gopath-environment-variable-on-ubuntu-what-file-must-i-edit) e dê logout e login no mesmo usuário.
 
-Siga as instruções de configuração do MYSQL e GO.
+No Ubuntu, siga as instruções de *Configuração* > *MYSQL* e *GO*
 
 ## Windows
 ### VirtualBox/Ubuntu
 [Instale o VirtualBox+Ubuntu](http://pt.wikihow.com/Instalar-o-Ubuntu-no-VirtualBox).
 No Ubuntu, [instale o GuestAdditions](http://www.htpcbeginner.com/install-virtualbox-guest-additions-on-ubuntu-debian/).
-No Windows, nas configurações do VirtualBox habilite o clipboard na direção Host->Guest (Windows->Ubuntu).
+No Windows, nas configurações do VirtualBox habilite o clipboard na direção do Host para o Guest (do Windows para o Ubuntu).
 
-No Ubuntu, siga as instruções de instalação para Ubuntu.
+No Ubuntu, siga as instruções de *Instalação* > *Ubuntu*
 
-Se preferir editar os arquivos pelo Windows, veja as instruções abaixo.
-Se preferir acessar o site pelo Windows, veja as instruções abaixo.
+Se preferir *editar os arquivos pelo Windows*, veja as instruções abaixo.
+Se preferir *acessar o site pelo Windows*, veja as instruções abaixo.
 
 #### Editar arquivos no Windows por pasta compartilhada
 No Ubuntu, desligue a máquina. 
@@ -59,7 +50,7 @@ $ ln -s SUA_PASTA_COMPARTILHADA_NO_UBUNTU $GOPATH/src/github.com/swfsql/estagio
 
 #### Acessar o site pelo Windows
 No Ubuntu, desligue a máquina.
-No Windows, [configure a conexão do guest](https://askubuntu.com/questions/52147/how-can-i-access-apache-on-virtualbox-guest-from-host). Você não precisa mudar o C:\\\\Windows\drivers\etc\host pois é possível acessar o site pelo ip:porta.
+No Windows, [configure a conexão do guest](https://askubuntu.com/questions/52147/how-can-i-access-apache-on-virtualbox-guest-from-host). Você não precisa mudar o C:\\\\Windows\drivers\etc\host pois é possível acessar o site pelo *ip:porta*.
 
 ## Arch
 Instale o [git](https://wiki.archlinux.org/index.php/git), e configure-o.
@@ -67,37 +58,30 @@ Instale o [mysql](https://wiki.archlinux.org/index.php/MySQL) e configure a senh
 Inicie o serviço do BD:
 # systemctl start mysqld.service
 Instale o [go](https://wiki.archlinux.org/index.php/Go) e configure o GOPATH.
-Siga as instruções de configuração do MYSQL e GO.
+No Ubuntu, siga as instruções de *Configuração* > *MYSQL* e *GO*
 
 # Configuração
 
 ## MYSQL
+Inicie o mysql e crie um BD:
 ```console
 $ mysql -u root -p
-```
-```mysql
 mysql> CREATE DATABASE my_db;	
 mysql> quit;
 ```
 
 ## GO
+Baixe os arquivos do projeto e crie um atalho:
 ```console
 $ go get github.com/beego/bee
 $ go get github.com/swfsql/estagio
-```
-
-
-# Execução
-Crie um atalho para o diretório do projeto:
-```console
 $ ln -s $GOPATH/src/github.com/swfsql/estagio ~/estagio
 ```
-Entre no diretório:
+
+# Execução
+Entre no diretório e execute o projeto:
 ```console
 $ cd estagio
-```
-Execute o servidor:
-```console
 $ bee run
 ```
 
@@ -105,14 +89,14 @@ $ bee run
 Com um navegador, acesse: 
 `localhost:8080`
 
-Para popular o BD, acesse: 
+Para inserir alguns dados no BD, acesse: 
 `localhost:8080/popular`
 
-Então de login como aluno1: 
+Então dê login como aluno1: 
 Login: `aluno@1.com` 
 Senha: `aluno1\_`
 
 ## Windows
 ### Servidor no VirtualBox
-Após ter configurado a Instalação>Windows>VirtualBox/Ubuntu>Acessar o site pelo Windows:
-Siga as mesmas instruções do Linux, mas troque o localhost pelo IP do comando ifconfig do Ubuntu.
+Após ter configurado a *Instalação* > *Windows* > *VirtualBox/Ubuntu* > *Acessar o site pelo Windows*:
+Siga as mesmas instruções do Linux, mas troque o *localhost* pelo IP do comando `$ ifconfig` do Ubuntu.
