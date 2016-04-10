@@ -5,23 +5,23 @@ Trabalho em grupo da disciplina ECO037 - Interface Humano-Computador da Unifei-I
 
 ## Ubuntu
 Instale e configure o git:
-```bash
-# apt-get install git
+```console
+\# apt-get install git
 $ git config --global user.email "seu_email@sei_la.com"
 $ git config --global user.name "Seu Nome Completo"
 ```
 
 Instale o mysql e configure a senha de root para estagio123:
-```bash
-# apt-get install mysql-server
+```console
+\# apt-get install mysql-server
 ```
 (Opcional) Deixe o seu mysql mais seguro:
 ```bash
-# mysql_secure_installation
+\# mysql_secure_installation
 ```
 (Re)inicie o serviço do BD:
 ```bash
-# service mysql restart
+\# service mysql restart
 ```
 
 Instale o [golang](https://github.com/golang/go/wiki/Ubuntu).
