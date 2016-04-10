@@ -6,22 +6,22 @@ Trabalho em grupo da disciplina ECO037 - Interface Humano-Computador da Unifei-I
 ## Ubuntu
 Instale e configure o git:
 ```console
-\# apt-get install git
+# apt-get install git
 $ git config --global user.email "seu_email@sei_la.com"
 $ git config --global user.name "Seu Nome Completo"
 ```
 
 Instale o mysql e configure a senha de root para estagio123:
 ```console
-\# apt-get install mysql-server
+# apt-get install mysql-server
 ```
 (Opcional) Deixe o seu mysql mais seguro:
-```bash
-\# mysql_secure_installation
+```console
+# mysql_secure_installation
 ```
 (Re)inicie o serviço do BD:
-```bash
-\# service mysql restart
+```console
+# service mysql restart
 ```
 
 Instale o [golang](https://github.com/golang/go/wiki/Ubuntu).
@@ -45,14 +45,14 @@ No Ubuntu, desligue a máquina.
 No windows, [configure uma pasta compartilhada](http://www.htpcbeginner.com/setup-virtualbox-shared-folders-linux-windows/).
 No Ubuntu, [configure a pasta compartilhada](http://www.htpcbeginner.com/mount-virtualbox-shared-folder-on-ubuntu-linux/).
 No Ubuntu, mova o projeto para a pasta compartilhada:
-```bash
+```console
 $ mv $GOPATH/src/github.com/swfsql/estagio/\* SUA_PASTA_COMPARTILHADA_NO_UBUNTU
 $ mv $GOPATH/src/github.com/swfsql/estagio/.\* SUA_PASTA_COMPARTILHADA_NO_UBUNTU
 $ rmdir $GOPATH/src/github.com/swfsql/estagio
 $ rm estagio
 ```
 Crie um atalho para a nova localização da pasta do projeto
-```bash
+```console
 $ ln -s SUA_PASTA_COMPARTILHADA ~/estagio
 $ ln -s SUA_PASTA_COMPARTILHADA_NO_UBUNTU $GOPATH/src/github.com/swfsql/estagio
 ```
@@ -72,7 +72,7 @@ Siga as instruções de configuração do MYSQL e GO.
 # Configuração
 
 ## MYSQL
-```bash
+```console
 $ mysql -u root -p
 ```
 ```mysql
@@ -81,7 +81,7 @@ mysql> quit;
 ```
 
 ## GO
-```bash
+```console
 $ go get github.com/beego/bee
 $ go get github.com/swfsql/estagio
 ```
@@ -89,15 +89,15 @@ $ go get github.com/swfsql/estagio
 
 # Execução
 Crie um atalho para o diretório do projeto:
-```bash
+```console
 $ ln -s $GOPATH/src/github.com/swfsql/estagio ~/estagio
 ```
 Entre no diretório:
-```bash
+```console
 $ cd estagio
 ```
 Execute o servidor:
-```bash
+```console
 $ bee run
 ```
 
