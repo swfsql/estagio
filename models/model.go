@@ -1,8 +1,14 @@
 package models
 
 import (
+	"errors"
 	"fmt"
 	"github.com/astaxie/beego/orm"
+)
+
+// ERRS
+var (
+	ErrNoRows = errors.New("<QuerySeter> no row found")
 )
 
 type Conta struct {
@@ -10,6 +16,16 @@ type Conta struct {
 	Pessoa  *Pessoa `orm:"rel(one)"`
 	Usuario string
 	Senha   string
+}
+
+func GetContaByEmail(email string) (conta Conta, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable("conta")
+	err = qs.Filter("Usuario", email).RelatedSel().One(&conta)
+	if err == orm.ErrNoRows {
+		err = ErrNoRows
+	}
+	return
 }
 
 type Pessoa struct {
@@ -32,6 +48,13 @@ type Aluno struct {
 	Curso        *Curso `orm:"rel(fk)"`
 	Periodo      uint
 	CargaHoraria uint
+}
+
+func GetAlunoByConta(conta_id uint) (aluno Aluno, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable("aluno")
+	err = qs.Filter("Conta", conta_id).RelatedSel().One(&aluno)
+	return
 }
 
 func (s Aluno) String() string {

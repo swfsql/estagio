@@ -5,11 +5,12 @@ import (
 	"fmt"
 
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/orm"
+	//"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/swfsql/estagio/models"
 )
 
+// ERRS
 var (
 	st_ok                   string = "ok"
 	st_err_usuario_inexiste string = "err_usuario_inexiste"
@@ -52,11 +53,11 @@ func (this *LoginController) Post() {
 
 	status := struct{ Status string }{""}
 
-	var conta models.Conta = models.Conta{}
-	o := orm.NewOrm()
-	o.QueryTable("conta").Filter("Usuario", dado.Email).RelatedSel().One(&conta)
+	conta, err_conta := models.GetContaByEmail(dado.Email)
+	//o := orm.NewOrm()
+	//o.QueryTable("conta").Filter("Usuario", dado.Email).RelatedSel().One(&conta)
 
-	if err == orm.ErrNoRows {
+	if err_conta == models.ErrNoRows {
 		status.Status = st_err_usuario_inexiste
 		this.Data["json"] = status
 		this.ServeJSON()
@@ -81,8 +82,7 @@ func (this *LoginController) Post() {
 	switch conta.Pessoa.Privilegio {
 
 	case 2: // aluno
-		var aluno models.Aluno
-		o.QueryTable("aluno").Filter("Conta", conta.Id).RelatedSel().One(&aluno)
+		aluno, _ := models.GetAlunoByConta(conta.Id)
 		estagios, _ := aluno.GetEstagios()
 		sess.Set("aluno", aluno)
 		sess.Set("estagios", estagios)
