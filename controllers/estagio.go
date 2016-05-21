@@ -6,36 +6,46 @@ import (
 	"strconv"
 )
 
-type AlunoController struct {
+type EstagioController struct {
 	AuthController
 }
 
-func (this *AlunoController) Get() {
+func (this *EstagioController) Get() {
 	sess := this.StartSession()
 	conta := sess.Get("conta").(models.Conta)
 
-	aluno_id, _ := strconv.ParseUint(this.Ctx.Input.Param(":id"), 10, 64)
-	fmt.Println("ENTROU NA PAGINA DO ALUNO")
+	estagio_id, _ := strconv.ParseUint(this.Ctx.Input.Param(":id"), 10, 64)
+	fmt.Println("ENTROU NA PAGINA DO ESTAGIO")
 
 	switch conta.Pessoa.Privilegio {
 	case 2: // aluno
 		aluno, _ := sess.Get("aluno").(models.Aluno)
-		if aluno_id != aluno.Id {
+		estagios, _ := sess.Get("estagios").([]*models.Estagio)
+
+		estagio_indice := -1
+		for i, e := range estagios {
+			if estagio_id == e.Id {
+				estagio_indice = i
+				break
+			}
+		}
+		if estagio_indice == -1 {
 			this.Redirect("/", 302)
 			return
 		}
-		estagios, _ := sess.Get("estagios").([]*models.Estagio)
-		this.TplName = "aluno.html"
+		estagio := estagios[estagio_indice]
+
+		this.TplName = "estagio_aluno.html"
 		this.Data["Aluno"] = aluno
 		this.Data["Curso"] = aluno.Curso
-		this.Data["Estagios"] = estagios
+		this.Data["Estagio"] = estagio
 		break
 	case 3: // professor normal
 		break
 	case 4: //professor coordenador
 		break
 	case 5: // admin
-		this.TplName = "aluno_admin.html"
+		this.TplName = "estagio_admin.html"
 		break
 	}
 
