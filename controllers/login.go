@@ -78,36 +78,44 @@ func (this *LoginController) Post() {
 
 	sess := this.StartSession()
 	sess.Set("conta", conta)
+	fmt.Printf("sessao iniciada")
 
 	switch conta.Pessoa.Privilegio {
 
 	case 2: // aluno
-		aluno, _ := models.GetAlunoByConta(conta.Id)
+		aluno, _ := models.GetAlunoByContaId(conta.Id)
+		fmt.Println("eh um aluno")
+		fmt.Println(aluno)
 		estagios, _ := aluno.GetEstagios()
 		sess.Set("aluno", aluno)
 		sess.Set("estagios", estagios)
 		break
 
 	case 3: // professor
-		var professor models.Professor
+		professor, _ := models.GetProfessorByContaId(conta.Id)
+		estagios, _ := professor.GetEstagios()
 		sess.Set("professor", professor)
-		// pegar estagios
-		// ...
+		sess.Set("estagios", estagios)
 		break
 
 	case 4: // coord curso
-		// pegar estagios
-		// ...
+		professor, _ := models.GetProfessorByContaId(conta.Id)
+		estagios, _ := models.GetEstagiosByCurso(professor.Curso)
+		sess.Set("professor", professor)
+		sess.Set("estagios", estagios)
 		break
 
 	case 5: // admin
 		// ...
+		/*admin, _ := models.GetAdminByConta(conta.Id)
+		estagios, _ := professor.GetEstagiosByCurso(professor.Curso)
+		sess.Set("professor", professor)
+		sess.Set("estagios", estagios)*/
 		break
 	}
 	status.Status = st_ok
 	this.Data["json"] = status
 	this.ServeJSON()
-
 }
 
 type RegisterController struct {

@@ -26,7 +26,7 @@ function LoginCtrl($scope, $http, $window) {
           
           switch (st.Status) {
            case "ok":
-              alert("ok");
+              alert("ok blabalbal");
               $window.location.href = '/';
             break;
            case "err_usuario_inexiste":

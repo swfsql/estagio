@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"github.com/swfsql/estagio/models"
+	"strconv"
 )
 
 type IndexController struct {
@@ -13,36 +14,38 @@ func (this *IndexController) Get() {
 	sess := this.StartSession()
 	conta := sess.Get("conta").(models.Conta)
 
+	fmt.Println("Entrou no DEFAULT")
 	this.Data["Usuario"] = conta.Pessoa
 	fmt.Println(conta.Pessoa.Privilegio)
 	fmt.Println(conta.Pessoa.Nome)
 
 	switch conta.Pessoa.Privilegio {
-	case 2:
+	case 2: // aluno
 		aluno, _ := sess.Get("aluno").(models.Aluno)
-		estagios, _ := sess.Get("estagios").([]*models.Estagio)
-
-		this.TplName = "aluno.html"
-		this.Data["HeadTitle"] = "Aluno Title"
-		this.Data["HeadScripts"] = []string{
-			"/static/js/jquery.min.js",
-			"/static/js/aluno.js"}
-		this.Data["HeadStyles"] = []string{
-			"/static/css/bootstrap-theme.min.css",
-			"/static/css/bootstrap.min.css",
-			"/static/css/aluno.css"}
-
-		this.Data["Aluno"] = aluno
-		this.Data["Curso"] = aluno.Curso
-		this.Data["Estagios"] = estagios
+		this.Redirect("/discente/"+strconv.FormatUint(aluno.Id, 10), 302)
+		return
 		break
-	case 3:
-		this.TplName = "index_professor.html"
+	case 3: // professor normal
+		professor, _ := sess.Get("professor").(models.Professor)
+		this.Redirect("/docente/"+strconv.FormatUint(professor.Id, 10), 302)
+		/*estagios, _ := sess.Get("estagios").([]*models.Estagio)
+		this.TplName = "professor.html"
+		this.Data["Professor"] = professor
+		this.Data["Curso"] = professor.Curso
+		this.Data["Estagios"] = estagios*/
+		return
 		break
-	case 4:
-		this.TplName = "index_coord.html"
+	case 4: //professor coordenador
+		professor, _ := sess.Get("professor").(models.Professor)
+		this.Redirect("/docente/"+strconv.FormatUint(professor.Id, 10), 302)
+		/*estagios, _ := sess.Get("estagios").([]*models.Estagio)
+		this.TplName = "professor.html"
+		this.Data["Professor"] = professor
+		this.Data["Curso"] = professor.Curso
+		this.Data["Estagios"] = estagios*/
+		return
 		break
-	case 5:
+	case 5: // admin
 		this.TplName = "index_admin.html"
 		break
 	}

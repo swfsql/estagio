@@ -66,7 +66,7 @@ func CriarDados() {
 	qs.All(&cursos)
 
 	for i := 0; i < 5; i++ {
-		o.Insert(&models.Aluno{Conta: contas[i], Curso: cursos[i%2], Ra: uint(i)})
+		o.Insert(&models.Aluno{Conta: contas[i], Curso: cursos[i%2], Ra: uint64(i)})
 		o.Insert(&models.Professor{Conta: contas[i+5], Curso: cursos[i%2], Seap: contas[i+10].Usuario})
 		o.Insert(&models.Professor{Conta: contas[i+10], Curso: cursos[i%4], Seap: contas[i+10].Usuario})
 

@@ -7,6 +7,10 @@ import (
 
 func init() {
 	beego.Router("/", &controllers.IndexController{})
+	beego.Router("/discente/?:id", &controllers.AlunoController{})
+	//beego.Router("/docente/?:id", &controllers.ProfessorController{})
+	//beego.Router("/nucleo/?:id", &controllers.AdminController{})
+	//beego.Router("/estagio/?:id", &controllers.EstagioController{})
 	beego.Router("/popular", &controllers.PopularController{})
 	beego.Router("/login", &controllers.LoginController{})
 	beego.Router("/pessoas/", &controllers.ListaPessoaController{}, "get:PegarPessoas;post:CadastrarPessoa")

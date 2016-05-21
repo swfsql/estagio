@@ -12,7 +12,7 @@ var (
 )
 
 type Conta struct {
-	Id      uint
+	Id      uint64
 	Pessoa  *Pessoa `orm:"rel(one)"`
 	Usuario string
 	Senha   string
@@ -29,12 +29,12 @@ func GetContaByEmail(email string) (conta Conta, err error) {
 }
 
 type Pessoa struct {
-	Id         uint
+	Id         uint64
 	Conta      *Conta `orm:"null;reverse(one)"`
 	Nome       string
 	Telefone   string
 	Email      string `orm:"unique"`
-	Privilegio int    // 0-supervisor/anonimo 1-aluno 2-professor 3-coord-curso 4-admin
+	Privilegio int32  // 0-supervisor/anonimo 1-aluno 2-professor 3-coord-curso 4-admin
 }
 
 func (s Pessoa) String() string {
@@ -42,15 +42,15 @@ func (s Pessoa) String() string {
 }
 
 type Aluno struct {
-	Id           uint
+	Id           uint64
 	Conta        *Conta `orm:"rel(fk)"`
-	Ra           uint   `orm:"unique"`
+	Ra           uint64 `64orm:"unique"`
 	Curso        *Curso `orm:"rel(fk)"`
-	Periodo      uint
-	CargaHoraria uint
+	Periodo      uint64
+	CargaHoraria uint64
 }
 
-func GetAlunoByConta(conta_id uint) (aluno Aluno, err error) {
+func GetAlunoByContaId(conta_id uint64) (aluno Aluno, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable("aluno")
 	err = qs.Filter("Conta", conta_id).RelatedSel().One(&aluno)
@@ -62,7 +62,7 @@ func (s Aluno) String() string {
 }
 
 type Professor struct {
-	Id    uint
+	Id    uint64
 	Conta *Conta `orm:"rel(fk)"`
 	Curso *Curso `orm:"rel(fk)"`
 	Seap  string `orm:"unique"`
@@ -72,8 +72,15 @@ func (s Professor) String() string {
 	return fmt.Sprintf("(professor .Id: %d, .Conta: (conta), .Curso: (curso), .Seap: %s)", s.Id, s.Seap)
 }
 
+func GetProfessorByContaId(conta_id uint64) (professor Professor, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable("professor")
+	err = qs.Filter("Conta", conta_id).RelatedSel().One(&professor)
+	return
+}
+
 type Documento struct {
-	Id     uint
+	Id     uint64
 	Titulo string
 }
 
@@ -82,7 +89,7 @@ func (s Documento) String() string {
 }
 
 type Estagio struct {
-	Id              uint
+	Id              uint64
 	Aluno           *Aluno     `orm:"rel(fk)"`
 	Professor       *Professor `orm:"rel(fk)"`
 	LocalFis        string
@@ -96,7 +103,7 @@ func (s Estagio) String() string {
 }
 
 type Estagio_Documento struct {
-	Id        uint
+	Id        uint64
 	Estagio   *Estagio   `orm:"rel(fk)"`
 	Documento *Documento `orm:"rel(fk)"`
 	//Arquivo *FILE
@@ -108,12 +115,12 @@ func (s Estagio_Documento) String() string {
 }
 
 type Curso struct {
-	Id                  uint
+	Id                  uint64
 	Nome                string `orm:"unique"`
-	CHObrigatoria       uint
-	CHNObrigatoria      uint
-	PeriodoNObrigatorio uint
-	PeriodoObrigatorio  uint
+	CHObrigatoria       uint64
+	CHNObrigatoria      uint64
+	PeriodoNObrigatorio uint64
+	PeriodoObrigatorio  uint64
 }
 
 func (s Curso) String() string {
@@ -136,6 +143,14 @@ func (p *Professor) GetEstagios() (estagios []*Estagio, err error) {
 	/*for _, estagio := range estagios {
 		fmt.Printf("Id: %d, ", estagio.Id, estagio.Aluno, estagio.Professor)
 	}*/
+	return
+}
+
+func GetEstagiosByCurso(curso *Curso) (estagios []*Estagio, err error) {
+	//var estagios []*Estagio
+	o := orm.NewOrm()
+	qs := o.QueryTable("estagio")
+	_, err = qs.Filter("Professor__Curso__Id", curso.Id).RelatedSel().All(&estagios)
 	return
 }
 

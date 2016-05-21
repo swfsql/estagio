@@ -10,8 +10,8 @@ type BaseController struct {
 }
 
 func (this *BaseController) Prepare() {
-	this.Layout = "layout.html"
-	this.LayoutSections = make(map[string]string)
+	//this.Layout = "layout.html"
+	//this.LayoutSections = make(map[string]string)
 }
 
 func (this *BaseController) All() {
