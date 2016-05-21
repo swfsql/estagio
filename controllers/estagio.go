@@ -2,8 +2,9 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/swfsql/estagio/models"
 	"strconv"
+
+	"github.com/swfsql/estagio/models"
 )
 
 type EstagioController struct {
@@ -22,28 +23,53 @@ func (this *EstagioController) Get() {
 		aluno, _ := sess.Get("aluno").(models.Aluno)
 		estagios, _ := sess.Get("estagios").([]*models.Estagio)
 
-		estagio_indice := -1
+		estagioIndice := -1
 		for i, e := range estagios {
 			if estagio_id == e.Id {
-				estagio_indice = i
+				estagioIndice = i
 				break
 			}
 		}
-		if estagio_indice == -1 {
+		if estagioIndice == -1 {
 			this.Redirect("/", 302)
 			return
 		}
-		estagio := estagios[estagio_indice]
+		estagio := estagios[estagioIndice]
 
 		this.TplName = "estagio_aluno.html"
 		this.Data["Aluno"] = aluno
 		this.Data["Curso"] = aluno.Curso
 		this.Data["Estagio"] = estagio
 		break
-	case 3: // professor normal
+	case 3, 4: // professor normal
+		professor, _ := sess.Get("professor").(models.Professor)
+		estagios, _ := sess.Get("estagios").([]*models.Estagio)
+
+		estagioIndice := -1
+
+		for i, e := range estagios {
+			if estagio_id == e.Id {
+				estagioIndice = i
+				break
+			}
+		}
+
+		if estagioIndice == -1 {
+			this.Redirect("/", 302)
+			return
+		}
+
+		estagio := estagios[estagioIndice]
+
+		this.TplName = "estagio_professor.html"
+		this.Data["Professor"] = professor
+		this.Data["Curso"] = professor.Curso
+		this.Data["Estagio"] = estagio
 		break
-	case 4: //professor coordenador
-		break
+
+		/*	case 4: //professor coordenador
+			break */
+
 	case 5: // admin
 		this.TplName = "estagio_admin.html"
 		break

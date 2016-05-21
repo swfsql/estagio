@@ -2,8 +2,9 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/swfsql/estagio/models"
 	"strconv"
+
+	"github.com/swfsql/estagio/models"
 )
 
 type AlunoController struct {
