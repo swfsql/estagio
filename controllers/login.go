@@ -21,7 +21,7 @@ type LoginController struct {
 	BaseController
 }
 
-func (this *LoginController) Get() {
+func (this *LoginController) Login() {
 	this.TplName = "login.html"
 	this.Data["HeadTitle"] = "Login Title"
 	this.Data["HeadScripts"] = []string{"/static/js/login.js"}
@@ -116,6 +116,14 @@ func (this *LoginController) Post() {
 	status.Status = st_ok
 	this.Data["json"] = status
 	this.ServeJSON()
+}
+
+func (this *LoginController) Logout() {
+	//println("logout")
+	//	sess := this.StartSession()
+	this.DestroySession()
+	//this.DelSession(sess)
+	this.Redirect("/", 302)
 }
 
 type RegisterController struct {
