@@ -24,7 +24,7 @@ func CriarDados() {
 
 	for i := 0; i < 5; i++ {
 		s := strconv.Itoa(i)
-		o.Insert(&models.Curso{Nome: "curso" + s})
+		o.Insert(&models.Curso{Nome: "curso" + s, Sigla: "sigla" + s})
 	}
 	for i := 0; i < 5; i++ {
 		s := strconv.Itoa(i)
