@@ -15,7 +15,7 @@ type Conta struct {
 	Id      uint64
 	Pessoa  *Pessoa `orm:"rel(one)"`
 	Usuario string
-	Senha   string
+	Senha   string `orm:"null"`
 }
 
 func GetContaByEmail(email string) (conta Conta, err error) {
@@ -32,9 +32,9 @@ type Pessoa struct {
 	Id         uint64
 	Conta      *Conta `orm:"null;reverse(one)"`
 	Nome       string
-	Telefone   string
+	Telefone   string `orm:"null"`
 	Email      string `orm:"unique"`
-	Privilegio int32  // 0-supervisor/anonimo 1-aluno 2-professor 3-coord-curso 4-admin
+	Privilegio uint32 // 0-supervisor/anonimo 1-aluno 2-professor 3-coord-curso 4-admin
 }
 
 func (s Pessoa) String() string {
@@ -117,6 +117,7 @@ func (s Estagio_Documento) String() string {
 type Curso struct {
 	Id                  uint64
 	Nome                string `orm:"unique"`
+	Sigla               string `orm:"unique"`
 	CHObrigatoria       uint64
 	CHNObrigatoria      uint64
 	PeriodoNObrigatorio uint64

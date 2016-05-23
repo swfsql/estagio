@@ -46,8 +46,8 @@ func (this *IndexController) Get() {
 		return
 		break
 	case 5: // admin
-		this.TplName = "index_admin.html"
-		break
+		this.Redirect("/nucleo/", 302)
+		return
 	}
 
 	fmt.Println(this.TplName)

@@ -1,0 +1,157 @@
+<!doctype html>
+<html ng-app>
+
+  <head>
+    <title>ADMIN</title>
+    <script src= "/static/js/jquery.min.js"></script>
+    <script src= "/static/js/bootstrap.min.js"></script>
+    <script src='/static/js/angular.min.js'></script>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" >
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet"  >
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <link href="/static/css/aluno.css" rel="stylesheet">
+    <script src='/static/js/admin.js'></script>
+  </head>
+
+
+    <body>
+      <div class='container' ng-controller='AdminCtrl'>
+
+
+
+
+        <!-- Nav tabs -->
+        <div class="row">
+          <div class="col-sm-3">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+
+              <li role="presentation">
+                <form class="navbar-form" role="search">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab">
+                  </div>
+                </form> 
+              </li>
+
+              <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  Cadastrar<span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                  <li role="presentation"><a href="#tab_estagio" aria-controls="home" role="tab" data-toggle="tab">
+                      Estágio</a></li>
+                  <li role="presentation"><a href="#tab_aluno" aria-controls="profile" role="tab" data-toggle="tab">
+                      Aluno</a></li>
+                  <li role="presentation"><a href="#tab_professor" aria-controls="messages" role="tab" data-toggle="tab">
+                      Professor</a></li>
+                </ul>
+              </li>
+
+              <li role="presentation"><a href="#tab_importar" aria-controls="settings" role="tab" data-toggle="tab">
+                  Importar dados</a></li>
+            </ul>
+          </div>
+
+
+          <div class="col-sm-9">
+            <!-- Tab panes -->
+
+            <div class="tab-content">
+
+              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_busca">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    Resultado da busca</h3>
+                </div>
+                <div class="panel-body">
+                  Conteúdo dinâmico
+                </div>
+              </div>
+
+              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_estagio">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    Cadastrar novo estágio</h3>
+                </div>
+                <div class="panel-body">
+                  Formulário do estágio
+                </div>
+              </div>
+
+              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_aluno">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    Cadastrar novo aluno</h3>
+                </div>
+                <div class="panel-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <label for="RA">RA: </label>
+                      <input class="form-control" type="text" id="RA" style="width: 50px; display: inline" ng-model='aluno_new_ra' required> 
+                    </div>
+                    <div class="form-group">
+                      <label for="periodo">Período:</label>
+                      <input class="form-control" type="number" max="10" min="1" value="1" id="periodo" style="width: 70px" ng-model='aluno_new_periodo' required/>
+                    </div>
+                    <div class="select-group">
+                      <label for="curso">Curso: </label>
+                      <select style="display: block;" ng-model='aluno_new_curso' required>
+                        <<<range $i, $c := .Cursos>>>
+                        <option value="<<<$i>>>">$c.Nome</option>
+                        <<<end>>>
+                      </select>
+                      </br>
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Nome:</label>
+                      <input type="text" class="form-control" id="name" ng-model='aluno_new_nome' required>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">E-mail:</label>
+                      <input class="form-control" type="email" id="email" ng-model='aluno_new_email' required/>
+                    </div>
+                    <div class="form-group">
+                      <label for="tel">Telefone:</label>
+                      <input class="form-control" type="tel" id="telefone" style="width: 100px" ng-model='aluno_new_telefone'/>
+                    </div>
+                    <div class="form-group">
+                      <label for="ch">Carga horária feita:</label>
+                      <input class="form-control" type="text" id="ch" style="width: 70px" ng-model='aluno_new_ch'/>
+                    </div>
+                    <button class="btn" ng-click='newAluno()' ng-disabled='working'>Enviar informações</button>
+                  </form>  
+
+
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_professor">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    Cadastrar novo professor</h3>
+                </div>
+                <div class="panel-body">
+                  Formulário do professor
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_importar">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    Importar dados</h3>
+                </div>
+                <div class="panel-body">
+                  Formulário da importação
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+      <img class='spinner' src='/static/img/spinner.gif' alt='Loading' ng-class='{working: working}'/>
+      </div>
+    </body>
+</html>
