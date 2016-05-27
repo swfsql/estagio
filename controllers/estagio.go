@@ -71,7 +71,23 @@ func (this *EstagioController) Get() {
 			break */
 
 	case 5: // admin
+		//	professor, _ := sess.Get("professor").(models.Professor)
+		estagios, _ := sess.Get("estagios").([]*models.Estagio)
+
+		estagioIndice := -1
+
+		for i, e := range estagios {
+			if estagio_id == e.Id {
+				estagioIndice = i
+				break
+			}
+		}
+
+		fmt.Println(estagioIndice)
+		estagio := estagios[estagioIndice]
+
 		this.TplName = "estagio_admin.html"
+		this.Data["Estagio"] = estagio
 		break
 	}
 
