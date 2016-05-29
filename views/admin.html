@@ -24,7 +24,7 @@
               <li role="presentation">
                 <form class="navbar-form" role="search">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
+                    <input type="number" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
                   </div>
                 </form> 
               </li>
@@ -58,7 +58,7 @@
                   <h3 class="panel-title">
                     RESULTADOS</h3>
                 </div>
-                <div class="panel-body" ng-repeat="pessoa in adm.pessoas">
+                <div class="panel-body" ng-repeat="pessoa in adm.pessoas | filter:Procura">
                   {{pessoa.nome}} 
                 </div>
               </div>
@@ -140,10 +140,7 @@
             </div>
           </div>
         </div>
-      <div>
-      <br/>
-      <input type="button" value="Compare" ng-click="Procura()">
-    </div>  
+
       </div>
       <img class='spinner' src='/static/img/spinner.gif' alt='Loading' ng-class='{working: working}'/>
       </div>          
