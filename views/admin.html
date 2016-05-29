@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app>
+<html ng-app = "admin">
 
   <head>
     <title>ADMIN</title>
@@ -14,13 +14,8 @@
     <script src='/static/js/admin.js'></script>
   </head>
 
-
-    <body>
-      <div class='container' ng-controller='AdminCtrl'>
-
-
-
-
+    <body ng-controller="AdminCtrl as adm">
+      <div class='container'>
         <!-- Nav tabs -->
         <div class="row">
           <div class="col-sm-3">
@@ -29,7 +24,7 @@
               <li role="presentation">
                 <form class="navbar-form" role="search">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab">
+                    <input type="text" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
                   </div>
                 </form> 
               </li>
@@ -61,10 +56,10 @@
               <div role="tabpanel" class="tab-pane panel panel-default" id="tab_busca">
                 <div class="panel-heading">
                   <h3 class="panel-title">
-                    Resultado da busca</h3>
+                    RESULTADOS</h3>
                 </div>
-                <div class="panel-body">
-                  Conteúdo dinâmico
+                <div class="panel-body" ng-repeat="pessoa in adm.pessoas">
+                  {{pessoa.nome}} 
                 </div>
               </div>
 
@@ -145,13 +140,12 @@
             </div>
           </div>
         </div>
-
-
-
-
+      <div>
+      <br/>
+      <input type="button" value="Compare" ng-click="Procura()">
+    </div>  
       </div>
-
       <img class='spinner' src='/static/img/spinner.gif' alt='Loading' ng-class='{working: working}'/>
-      </div>
-    </body>
+      </div>          
+  </body>
 </html>
