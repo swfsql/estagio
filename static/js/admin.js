@@ -10,54 +10,59 @@
   var app = angular.module('admin', [ ]);  
 
    app.controller('AdminCtrl', function($scope, $http, $window) { 
-   this.pessoas = indv;
+   this.pessoas = indvs;
+   this.pessoa = {};
 
+    /*this.pessoas = this.pessoas.concat(this.individuo);
+    this.pessoas.push(this.individuo)*/
 
-      /*$scope.Procura = function() {
-        if($scope.pesqText == '123')
-          alert("felipaaae");
-        return this.tab == textRecv;
-      };*/
+      this.newAluno = function (){
+          alert("felipaaae0");
+          this.pessoas.push(this.pessoa);
+          alert("felipaaae3");
 
-      $scope.Procura = function(pessoa){
+          this.pessoa = {};
+      };
+
+      this.Procura = function (pessoa){
         return ($scope.pesqText === pessoa.idade);
       };
 
     });
 
-       var indv = [
-      {
-        nome:"felipe",
-        idade: 22,
-      },
-      {
-        nome: "aosdsaio",
-        idade: 12,
-      },
-      {
-        nome:"felipe",
-        idade: 145,
-      },
-      {
-        nome: "fel",
-        idade: 1,
-      },
-      {
-        nome:"aes",
-        idade: 1233,
-      },
-      {
-        nome: "fas",
-        idade: 3456,
-      },
-      {
-        nome:"qweqw",
-        idade: 12,
-      },
-      {
-        nome: "aosdadewqesaio",
-        idade: 42,
-      },
-    ];
+      var indv = [{nome:"jo", idade: 26}];
+      var indvs = [{
+          nome:"felipe",
+          idade: 22,
+        },
+        {
+          nome: "aosdsaio",
+          idade: 12,
+        },
+        {
+          nome:"felipe",
+          idade: 145,
+        },
+        {
+          nome: "fel",
+          idade: 1,
+        },
+        {
+          nome:"aes",
+          idade: 1233,
+        },
+        {
+          nome: "fas",
+          idade: 3456,
+        },
+        {
+          nome:"qweqw",
+          idade: 12,
+        },
+        {
+          nome: "aosdadewqesaio",
+          idade: 42,
+        },
+      ];
 
 })();
