@@ -42,7 +42,7 @@ func (this *EstagioController) Get() {
 		this.Data["Estagio"] = estagio
 		break
 	case 3, 4: // professor normal
-		professor, _ := sess.Get("professor").(models.Professor)
+		//professor, _ := sess.Get("professor").(models.Professor)
 		estagios, _ := sess.Get("estagios").([]*models.Estagio)
 
 		estagioIndice := -1
@@ -62,8 +62,8 @@ func (this *EstagioController) Get() {
 		estagio := estagios[estagioIndice]
 
 		this.TplName = "estagio_professor.html"
-		this.Data["Professor"] = professor
-		this.Data["Curso"] = professor.Curso
+		//	this.Data["Professor"] = professor
+		//	this.Data["Curso"] = professor.Curso
 		this.Data["Estagio"] = estagio
 		break
 
@@ -71,8 +71,7 @@ func (this *EstagioController) Get() {
 			break */
 
 	case 5: // admin
-		//	professor, _ := sess.Get("professor").(models.Professor)
-		estagios, _ := sess.Get("estagios").([]*models.Estagio)
+		estagios, _ := models.GetEstagios()
 
 		estagioIndice := -1
 
@@ -83,11 +82,17 @@ func (this *EstagioController) Get() {
 			}
 		}
 
+		if estagioIndice == -1 {
+			this.Redirect("/", 302)
+			return
+		}
+
 		fmt.Println(estagioIndice)
 		estagio := estagios[estagioIndice]
 
 		this.TplName = "estagio_admin.html"
 		this.Data["Estagio"] = estagio
+		//this.Data[]
 		break
 	}
 

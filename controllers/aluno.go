@@ -32,10 +32,13 @@ func (this *AlunoController) Get() {
 		this.Data["Estagios"] = estagios
 		break
 	case 3: // professor normal
+		this.Redirect("/", 302)
 		break
 	case 4: //professor coordenador
+		this.Redirect("/", 302)
 		break
 	case 5: // admin
+		this.Redirect("/", 302)
 		this.TplName = "aluno_admin.html"
 		break
 	}

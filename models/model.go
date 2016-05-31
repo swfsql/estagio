@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 	"fmt"
+
 	"github.com/astaxie/beego/orm"
 )
 
@@ -178,5 +179,12 @@ func GetAlunos() (alunos []*Aluno, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable("aluno")
 	_, err = qs.All(&alunos)
+	return
+}
+
+func GetEstagios() (estagios []*Estagio, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable("estagio")
+	_, err = qs.All(&estagios)
 	return
 }
