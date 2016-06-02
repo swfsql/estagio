@@ -16,17 +16,23 @@ func (this *TrocaSenhaController) Get() {
 
 	fmt.Println("ENTROU NA PAGINA DE troca de senha")
 
-	/*	switch conta.Pessoa.Privilegio {
-		case 5:
-			this.TplName = "admin.html"
-			//estagios, _ := sess.Get("estagios").([]*models.Estagio)
-			//this.Data["Estagios"] = estagios
-			break
-		default:
-			this.Redirect("/", 302)
-			return
-		}*/
-	this.TplName = "trocarSenha.html"
+	switch conta.Pessoa.Privilegio {
+	case 2: //aluno
+		this.TplName = "trocarSenha_aluno.html"
+		//estagios, _ := sess.Get("estagios").([]*models.Estagio)
+		//this.Data["Estagios"] = estagios
+		break
+	case 3, 4: // professor
+		this.TplName = "trocarSenha_professor.html"
+		break
+	case 5:
+		this.TplName = "trocarSenha_admin.html"
+		break
+	default:
+		this.Redirect("/", 302)
+		return
+	}
+	//this.TplName = "trocarSenha.html"
 
 	this.Data["Usuario"] = conta.Pessoa
 	fmt.Println(conta.Pessoa.Privilegio)
