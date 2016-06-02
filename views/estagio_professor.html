@@ -37,7 +37,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Trocar Senha</a></li>
+              <li><a href="/discente"><span class="glyphicon glyphicon-menu-right"></span> Voltar</a></li>
               <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
             </ul>
             </div>
@@ -45,54 +45,28 @@
         </div>
         <!-- /.container -->
     </nav>
-
-    <div id ="bemvindo" class="jumbotron">
-    <p>Bem vindo <<<.Usuario.Nome>>>, selecione o estagio desejado e veja todas as informações disponíveis, atente-se tambem aos alertas para não esquecer de entregar nenhum documento.</p>
-    </div>
-
+     
     <div class="jumbotron">
 
     <div class="estagios">
-    <h3>Estagios</h3>
-      <div class="panel-group">
-        <div class="panel panel-default">
-
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" href="#collapse">Estagio #</a>
-            </h4>
-          </div>
-
-            <ul class="list-group">
-              <li class="list-group-item">ID: <<<.Estagio.Id>>></li>
-              <li class="list-group-item">Professor: <<<.Estagio.Professor>>></li>
-              <li class="list-group-item">Local Fisico: <<<.Estagio.LocalFis>>></li>
-              <li class="list-group-item">Obrigatoriedade: <<<.Estagio.Obrigatoriedade>>></li>
-              <li class="list-group-item">Data Inicio: <<<.Estagio.DataInicio>>></li>
-              <li class="list-group-item">Data Fim: <<<.Estagio.DataFim>>></li>
-            </ul>
-
-      </div>
-    </div>
+    <h3>Informações do estágio</h3>
+      <ul class="list-group">
+        <<<range $e := .Estagios>>>
+        <li class="list-group-item">Professor: <<<$e.Professor>>></li>
+        <li class="list-group-item">Local Fisico: <<<$e.LocalFis>>></li>
+        <li class="list-group-item">Obrigatoriedade: <<<$e.Obrigatoriedade>>></li>
+        <li class="list-group-item">Data Inicio: <<<$e.DataInicio>>></li>
+        <li class="list-group-item">Data Fim: <<<$e.DataFim>>></li>
+      </ul>
+        <<<end>>>
   </div>
-
-    <h3>Alertas</h3>
-
-    <div class="alert alert-success" role="alert">
-      <strong>Parabens!</strong> Todos arquivos enviados com sucesso.
-    </div>
-
-    <div class="alert alert-danger" role="alert">
-      <strong>Atenção!</strong> A data limite para entrega dos documentos está proxima, fique atento.
-    </div>
-
-    </div>
+    
+  </div> <!-- /container -->
 
     <footer class="footer">
       <p>&copy; IHC-Grupo 1, Inc.</p>
     </footer>
 
-  </div> <!-- /container -->
 
   </body>
 </html>

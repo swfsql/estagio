@@ -1,0 +1,52 @@
+body {
+  padding-top: 100px;
+  padding-bottom: 60px;
+  width: 100%; height: 100%;
+  background: rgba(204,204,204,1);
+  background: -moz-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(204,204,204,1) 22%, rgba(237,237,237,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(204,204,204,1)), color-stop(22%, rgba(204,204,204,1)), color-stop(100%, rgba(237,237,237,1)));
+  background: -webkit-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(204,204,204,1) 22%, rgba(237,237,237,1) 100%);
+  background: -o-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(204,204,204,1) 22%, rgba(237,237,237,1) 100%);
+  background: -ms-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(204,204,204,1) 22%, rgba(237,237,237,1) 100%);
+  background: linear-gradient(to bottom, rgba(204,204,204,1) 0%, rgba(204,204,204,1) 22%, rgba(237,237,237,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#ededed', GradientType=0 );
+}
+
+html {
+  overflow-y: scroll;
+  width: 100%; height: 100%;
+}
+
+.jumbotron {
+  border: 1px solid black;
+  padding: 10px 10px;
+}
+
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 860px;
+  }
+}
+
+.container-narrow > hr {
+  margin: 35px 0;
+}
+
+.estagio {
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.estagio .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+.footer {
+  clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-bottom: 50px;
+}
