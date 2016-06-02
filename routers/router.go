@@ -14,6 +14,7 @@ func init() {
 	beego.Router("/popular", &controllers.PopularController{})
 	beego.Router("/logout", &controllers.LoginController{}, "get:Logout")
 	beego.Router("/login", &controllers.LoginController{}, "get:Login;post:Post")
+	beego.Router("/trocarsenha", &controllers.TrocaSenhaController{})
 
 	beego.Router("/pessoas/", &controllers.ListaPessoaController{}, "get:PegarPessoas;post:CadastrarPessoa")
 
