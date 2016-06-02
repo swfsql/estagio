@@ -40,7 +40,12 @@
                 </div>
                 <!-- /.container -->
             </nav>
+
         <!-- Nav tabs -->
+        <div id ="bemvindo" class="jumbotron">
+        <p>Bem vindo <<<.Usuario.Nome>>>, Selecione alguma das ações abaixo para realizar.</p>
+        </div>
+        <div class="jumbotron">
         <div class="row">
           <div class="col-sm-3">
             <ul class="nav nav-pills nav-stacked" role="tablist">
@@ -55,7 +60,7 @@
 
               <li role="presentation" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  Cadastrar<span class="caret"></span></a>
+                  Cadastros<span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="dLabel">
                   <li role="presentation"><a href="#tab_estagio" aria-controls="home" role="tab" data-toggle="tab">
                       Estágio</a></li>
@@ -67,7 +72,7 @@
               </li>
 
               <li role="presentation"><a href="#tab_importar" aria-controls="settings" role="tab" data-toggle="tab">
-                  Importar dados</a></li>
+                  Importação de dados</a></li>
             </ul>
           </div>
 
@@ -164,9 +169,15 @@
             </div>
           </div>
         </div>
+      </div>
 
       </div>
       <img class='spinner' src='/static/img/spinner.gif' alt='Loading' ng-class='{working: working}'/>
       </div>
+<!--
+      <footer class="footer">
+        <p>&copy; IHC-Grupo 1, Inc.</p>
+      </footer>
+-->
   </body>
 </html>
