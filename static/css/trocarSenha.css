@@ -10,6 +10,7 @@ body {
   background: -ms-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(204,204,204,1) 22%, rgba(237,237,237,1) 100%);
   background: linear-gradient(to bottom, rgba(204,204,204,1) 0%, rgba(204,204,204,1) 22%, rgba(237,237,237,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#ededed', GradientType=0 );
+  background-attachment: fixed;
 }
 
 html {
@@ -22,7 +23,6 @@ html {
   padding: 10px 10px;
 }
 
-
 @media (min-width: 768px) {
   .container {
     max-width: 860px;
@@ -34,7 +34,7 @@ html {
 }
 
 .login {
-  padding: 20px;
+  padding: 30px;
   font-size: 1.4em;
   font-weight: normal;
   text-align: center;

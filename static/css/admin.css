@@ -25,6 +25,7 @@ html {
   padding: 10px 10px;
 }
 
+
 @media (min-width: 768px) {
   .container {
     max-width: 860px;
