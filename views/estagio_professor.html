@@ -35,7 +35,7 @@
           </button>
           <a class="navbar-brand">Estagio UNIFEI</a>
         </div>
-          
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/docente"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a></li>
@@ -48,16 +48,13 @@
     <div class="jumbotron">
       <div class="estagios">
         <h3>Informações do estagio</h3>
-        <<<range $e := .Estagios>>>
         <ul class="list-group">
-          <li class="list-group-item"><a href="/estagio/<<<$e.Id>>>">Mais Detalhes</a></li>
-          <li class="list-group-item">Professor: <<<$e.Professor>>></li>
-          <li class="list-group-item">Local Fisico: <<<$e.LocalFis>>></li>
-          <li class="list-group-item">Obrigatoriedade: <<<$e.Obrigatoriedade>>></li>
-          <li class="list-group-item">Data Inicio: <<<$e.DataInicio>>></li>
-          <li class="list-group-item">Data Fim: <<<$e.DataFim>>></li>
+          <li class="list-group-item">Professor: <<<.Estagio.Professor>>></li>
+          <li class="list-group-item">Local Fisico: <<<.Estagio.LocalFis>>></li>
+          <li class="list-group-item">Obrigatoriedade: <<<.Estagio.Obrigatoriedade>>></li>
+          <li class="list-group-item">Data Inicio: <<<.Estagio.DataInicio>>></li>
+          <li class="list-group-item">Data Fim: <<<.Estagio.DataFim>>></li>
         </ul>
-        <<<end>>>
       </div>
     </div>
 
