@@ -25,6 +25,7 @@ func (this *EstagioController) Get() {
 
 		estagioIndice := -1
 		for i, e := range estagios {
+			fmt.Println("Estagio id: ", e.Id)
 			if estagio_id == e.Id {
 				estagioIndice = i
 				break
