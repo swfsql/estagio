@@ -1,180 +1,191 @@
 <!doctype html>
 <html ng-app = "admin">
 
-  <head>
-    <title>ADMIN</title>
-    <script src= "/static/js/jquery.min.js"></script>
-    <script src= "/static/js/bootstrap.min.js"></script>
-    <script src='/static/js/angular.min.js'></script>
-    <script src='/static/js/admin.js'></script>
+<head>
+  <title>ADMIN</title>
+  <script src= "/static/js/jquery.min.js"></script>
+  <script src= "/static/js/bootstrap.min.js"></script>
+  <script src='/static/js/angular.min.js'></script>
+  <script src='/static/js/admin.js'></script>
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
-    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" >
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet"  >
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    <link href="/static/css/admin.css" rel="stylesheet">
-    
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" >
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet"  >
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+  <link href="/static/css/admin.css" rel="stylesheet">
 
-  </head>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 
-    <body ng-controller="AdminCtrl as adm">
+</head>
 
-    <div class="container">
+<body ng-controller="AdminCtrl as adm">
 
-      <!-- Navigation -->
+  <div class="container">
+
+    <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand">Estagio UNIFEI</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/trocarsenha"><span class="glyphicon glyphicon-user"></span> Trocar Senha</a></li>
-              <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
-            </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+      <div class="container">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand">Estagio UNIFEI</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/trocarsenha"><span class="glyphicon glyphicon-user"></span> Trocar Senha</a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
+          </ul>
+          </div>
+      </div>
+    </nav> <!-- /Navigation -->
+
 
     <div class="jumbotron">
-        <!-- Nav tabs -->
-        <div class="row">
-          <div class="col-sm-3">
-            <ul class="nav nav-pills nav-stacked" role="tablist">
-
-              <li role="presentation">
-                <form class="navbar-form" role="search">
-                  <div class="form-group">
-                    <input type="number" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
-                  </div>
-                </form> 
-              </li>
-
-              <li role="presentation" class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  Cadastrar<span class="caret"></span></a>
-                <ul class="dropdown-menu" aria-labelledby="dLabel">
-                  <li role="presentation"><a href="#tab_estagio" aria-controls="home" role="tab" data-toggle="tab">
-                      Estágio</a></li>
-                  <li role="presentation"><a href="#tab_aluno" aria-controls="profile" role="tab" data-toggle="tab">
-                      Aluno</a></li>
-                  <li role="presentation"><a href="#tab_professor" aria-controls="messages" role="tab" data-toggle="tab">
-                      Professor</a></li>
-                </ul>
-              </li>
-
-              <li role="presentation"><a href="#tab_importar" aria-controls="settings" role="tab" data-toggle="tab">
-                  Importar dados</a></li>
-            </ul>
-          </div>
 
 
-          <div class="col-sm-9">
-            <!-- Tab panes -->
+      <ul class="nav nav-pills nav-justified">
+        <li class="active"><a data-toggle="pill" href="#buscar">Buscar</a></li>
+        <li><a data-toggle="pill" href="#importar">Importar dados</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastrar
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a data-toggle="pill" href="#tab_aluno">Aluno</a></li>
+            <li><a href="#tab_professor" role="tab" data-toggle="tab">Professor</a></li>
+            <li><a href="#tab_estagio" role="tab" data-toggle="tab">Estagio</a></li>
+          </ul>
+        </li>
+      </ul>
 
-            <div class="tab-content">
+      <div class="tab-content">
 
-              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_busca">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    RESULTADOS</h3>
-                </div>
-                <div class="panel-body" ng-repeat="pessoa in adm.pessoas | filter:adm.Procura">
+        <!-- Busca-->
+        <div id="buscar" class="tab-pane fade in active">
+          <li role="presentation">
+            <form class="navbar-form" role="search">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
+              </div>
+            </form> 
+          </li>
+
+          <div role="tabpanel" class="tab-pane panel panel-default fade" id="tab_busca">
+            <div class="panel-body" ng-repeat="pessoa in adm.pessoas | filter:adm.Procura">
                   {{pessoa.nome}} 
-                </div>
-              </div>
-
-              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_estagio">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    Cadastrar novo estágio</h3>
-                </div>
-                <div class="panel-body">
-                  Formulário do estágio
-                </div>
-              </div>
-
-              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_aluno">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    Cadastrar novo aluno</h3>
-                </div>
-                <div class="panel-body">
-                  <form role="form">
-                    <div class="form-group">
-                      <label for="RA">RA: </label>
-                      <input class="form-control" type="number" id="RA" style="width: 50px; display: inline" ng-model='adm.pessoa.idade' required> 
-                    </div>
-                    <div class="form-group">
-                      <label for="periodo">Período:</label>
-                      <input class="form-control" type="number" max="10" min="1" value="1" id="periodo" style="width: 70px" ng-model='aluno_new_periodo' required/>
-                    </div>
-                    <div class="select-group">
-                      <label for="curso">Curso: </label>
-                      <select style="display: block;" ng-model='aluno_new_curso'>
-                        <<<range $i, $c := .Cursos>>>
-                        <option value="<<<$i>>>">$c.Nome</option>
-                        <<<end>>>
-                      </select>
-                      </br>
-                    </div>
-                    <div class="form-group">
-                      <label for="name">Nome:</label>
-                      <input type="text" class="form-control" id="name" ng-model='adm.pessoa.nome' required>
-                    </div>
-                    <div class="form-group">
-                      <label for="email">E-mail:</label>
-                      <input class="form-control" type="email" id="email" ng-model='aluno_new_email' required/>
-                    </div>
-                    <div class="form-group">
-                      <label for="tel">Telefone:</label>
-                      <input class="form-control" type="tel" id="telefone" style="width: 100px" ng-model='aluno_new_telefone'/>
-                    </div>
-                    <div class="form-group">
-                      <label for="ch">Carga horária feita:</label>
-                      <input class="form-control" type="text" id="ch" style="width: 70px" ng-model='aluno_new_ch'/>
-                    </div>
-                    <button class="btn" ng-click='adm.newAluno(pessoa)' ng-disabled='working'>Enviar informações</button>
-                  </form>  
-
-
-                </div>
-              </div>
-              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_professor">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    Cadastrar novo professor</h3>
-                </div>
-                <div class="panel-body">
-                  Formulário do professor
-                </div>
-              </div>
-              <div role="tabpanel" class="tab-pane panel panel-default" id="tab_importar">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    Importar dados</h3>
-                </div>
-                <div class="panel-body">
-                  Formulário da importação
-                </div>
-              </div>
             </div>
           </div>
         </div>
+        <!-- /Busca-->
+
+
+        <!-- Importa dados-->
+        <div id="importar" class="tab-pane">
+          <h3>Importar</h3>
+          <p>importar dados....</p>
+        </div>
+        <!-- /Importa dados-->
+
+
+
+        <!-- Cadastra estagio-->
+        <div id="tab_estagio" class="tab-pane">
+          <h3>cadastrar estagio!!</h3>
+          <p>cadastrar dados....</p>
+        </div>
+        <!-- Cadastra estagio-->
+
+
+        <!-- Cadastra Aluno-->
+        <div role="tabpanel" class="tab-pane panel panel-default" id="tab_aluno">
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="RA">RA: </label>
+                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.idade' required> 
+              </div>
+              <div class="form-group">
+                <label for="periodo">Período:</label>
+                <input class="form-control" type="number" max="10" min="1" value="1" id="periodo" style="width: 100px" ng-model='aluno_new_periodo' required/>
+              </div>
+              <div class="select-group">
+                <label for="curso">Curso: </label>
+                <select style="display: block;" ng-model='aluno_new_curso'>
+                  <<<range $i, $c := .Cursos>>>
+                  <option value="<<<$i>>>">$c.Nome</option>
+                  <<<end>>>
+                </select>
+                </br>
+              </div>
+              <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" class="form-control" id="name" ng-model='adm.pessoa.nome' required>
+              </div>
+              <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input class="form-control" type="email" id="email" ng-model='aluno_new_email' required/>
+              </div>
+              <div class="form-group">
+                <label for="tel">Telefone:</label>
+                <input class="form-control" type="tel" id="telefone" style="width: 100px" ng-model='aluno_new_telefone'/>
+              </div>
+              <div class="form-group">
+                <label for="ch">Carga horária feita:</label>
+                <input class="form-control" type="text" id="ch" style="width: 100px" ng-model='aluno_new_ch'/>
+              </div>
+              <button class="btn" ng-click='adm.newAluno(pessoa)' ng-disabled='working'>Enviar informações</button>
+            </form>  
+          </div>
+        </div>
+        <!-- /Cadastra Aluno-->
+
+
+        <!-- Cadastra professor-->
+        <div role="tabpanel" class="tab-pane panel panel-default" id="tab_professor">
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="RA">Seap: </label>
+                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.idade' required> 
+              </div>
+              <div class="select-group">
+                <label for="curso">Curso: </label>
+                <select style="display: block;" ng-model='aluno_new_curso'>
+                  <<<range $i, $c := .Cursos>>>
+                  <option value="<<<$i>>>">$c.Nome</option>
+                  <<<end>>>
+                </select>
+                </br>
+              </div>
+              <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" class="form-control" id="name" ng-model='adm.pessoa.nome' required>
+              </div>
+              <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input class="form-control" type="email" id="email" ng-model='aluno_new_email' required/>
+              </div>
+              <div class="form-group">
+                <label for="tel">Telefone:</label>
+                <input class="form-control" type="tel" id="telefone" style="width: 100px" ng-model='aluno_new_telefone'/>
+              </div>
+              <button class="btn" ng-click='adm.newAluno(pessoa)' ng-disabled='working'>Enviar informações</button>
+            </form>  
+          </div>
+        </div>
+        <!-- /Cadastra professor-->
 
     </div>
 
-  </body>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; IHC-Grupo 1, Inc.</p>
+  </footer>
+
+</body>
 </html>
