@@ -30,9 +30,11 @@
       };
 
       this.ProcuraProfessor = function (pessoa){
+        if($scope.pesqText > 0)
         return ($scope.pesqText === pessoa.seap);
       };
       this.ProcuraAluno = function (pessoa){
+        if($scope.pesqText > 0)
         return ($scope.pesqText === pessoa.ra);
       };
 
