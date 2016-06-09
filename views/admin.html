@@ -71,12 +71,12 @@
               <div class="form-group">
                 <input type="number" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
               </div>
-            </form> 
+            </form>
           </li>
 
           <div role="tabpanel" class="tab-pane panel panel-default fade" id="tab_busca">
             <div class="panel-body" ng-repeat="pessoa in adm.pessoas | filter:adm.Procura">
-                  {{pessoa.nome}} 
+                  {{pessoa.nome}}
             </div>
           </div>
         </div>
@@ -87,6 +87,12 @@
         <div id="importar" class="tab-pane">
           <h3>Importar</h3>
           <p>importar dados....</p>
+          <form>
+          <p>Escolha um arquivo XML <input type="file" name="datafile" size="40"></p>
+          <div>
+          <input type="submit" value="Enviar">
+          </div>
+          </form>
         </div>
         <!-- /Importa dados-->
 
@@ -106,7 +112,7 @@
             <form role="form">
               <div class="form-group">
                 <label for="RA">RA: </label>
-                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.idade' required> 
+                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.idade' required>
               </div>
               <div class="form-group">
                 <label for="periodo">Período:</label>
@@ -138,7 +144,7 @@
                 <input class="form-control" type="text" id="ch" style="width: 100px" ng-model='aluno_new_ch'/>
               </div>
               <button class="btn" ng-click='adm.newAluno(pessoa)' ng-disabled='working'>Enviar informações</button>
-            </form>  
+            </form>
           </div>
         </div>
         <!-- /Cadastra Aluno-->
@@ -150,7 +156,7 @@
             <form role="form">
               <div class="form-group">
                 <label for="RA">Seap: </label>
-                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.idade' required> 
+                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.idade' required>
               </div>
               <div class="select-group">
                 <label for="curso">Curso: </label>
@@ -174,7 +180,7 @@
                 <input class="form-control" type="tel" id="telefone" style="width: 100px" ng-model='aluno_new_telefone'/>
               </div>
               <button class="btn" ng-click='adm.newAluno(pessoa)' ng-disabled='working'>Enviar informações</button>
-            </form>  
+            </form>
           </div>
         </div>
         <!-- /Cadastra professor-->
