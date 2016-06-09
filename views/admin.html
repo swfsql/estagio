@@ -71,15 +71,20 @@
               <div class="form-group">
                 <input type="number" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
               </div>
-            </form> 
+            </form>
           </li>
 
           <div role="tabpanel" class="tab-pane panel panel-default fade" id="tab_busca">
+<<<<<<< HEAD
             <div class="panel-body" ng-repeat="pessoa in adm.professores | filter:adm.ProcuraProfessor">
                   {{pessoa.nome}} {{pessoa.email}} {{pessoa.seap}} {{pessoa.telefone}} {{pessoa.periodo}} {{pessoa.ch}} {{pessoa.curso}} 
             </div>          
             <div class="panel-body" ng-repeat="pessoa in adm.alunos | filter:adm.ProcuraAluno">
                   {{pessoa.nome}} {{pessoa.email}} {{pessoa.ra}} {{pessoa.telefone}} {{pessoa.curso}} 
+=======
+            <div class="panel-body" ng-repeat="pessoa in adm.pessoas | filter:adm.Procura">
+                  {{pessoa.nome}}
+>>>>>>> 7941f28e3ebafa61aafb20ba6f6d0f6d467e96c8
             </div>
 
           </div>
@@ -91,6 +96,12 @@
         <div id="importar" class="tab-pane">
           <h3>Importar</h3>
           <p>importar dados....</p>
+          <form>
+          <p>Escolha um arquivo XML <input type="file" name="datafile" size="40"></p>
+          <div>
+          <input type="submit" value="Enviar">
+          </div>
+          </form>
         </div>
         <!-- /Importa dados-->
 
@@ -110,7 +121,11 @@
             <form role="form" ng-submit='adm.newAluno(pessoa)'>
               <div class="form-group">
                 <label for="RA">RA: </label>
+<<<<<<< HEAD
                 <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.ra' required> 
+=======
+                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.idade' required>
+>>>>>>> 7941f28e3ebafa61aafb20ba6f6d0f6d467e96c8
               </div>
               <div class="form-group">
                 <label for="periodo">Período:</label>
@@ -146,8 +161,13 @@
                 <label for="ch">Carga horária feita:</label>
                 <input class="form-control" type="text" id="ch" style="width: 100px" ng-model='adm.pessoa.ch' required />
               </div>
+<<<<<<< HEAD
               <button class="btn" ng-disabled='working'>Enviar informações</button>
             </form>  
+=======
+              <button class="btn" ng-click='adm.newAluno(pessoa)' ng-disabled='working'>Enviar informações</button>
+            </form>
+>>>>>>> 7941f28e3ebafa61aafb20ba6f6d0f6d467e96c8
           </div>
         </div>
         <!-- /Cadastra Aluno-->
@@ -159,7 +179,11 @@
             <form role="form" ng-submit='adm.newProfessor(pessoa)'>
               <div class="form-group">
                 <label for="RA">Seap: </label>
+<<<<<<< HEAD
                 <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.seap' required> 
+=======
+                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.idade' required>
+>>>>>>> 7941f28e3ebafa61aafb20ba6f6d0f6d467e96c8
               </div>
               <div class="select-group">
                 <label for="curso">Curso: </label>
@@ -187,8 +211,13 @@
                 <label for="tel">Telefone:</label>
                 <input class="form-control" type="tel" id="telefone" style="width: 100px" ng-model='adm.pessoa.telefone'/>
               </div>
+<<<<<<< HEAD
               <button class="btn" ng-disabled='working'>Enviar informações</button>
             </form>  
+=======
+              <button class="btn" ng-click='adm.newAluno(pessoa)' ng-disabled='working'>Enviar informações</button>
+            </form>
+>>>>>>> 7941f28e3ebafa61aafb20ba6f6d0f6d467e96c8
           </div>
         </div>
         <!-- /Cadastra professor-->
