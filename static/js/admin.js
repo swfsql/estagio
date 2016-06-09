@@ -10,59 +10,65 @@
   var app = angular.module('admin', [ ]);  
 
    app.controller('AdminCtrl', function($scope, $http, $window) { 
-   this.pessoas = indvs;
+   this.professores = indvs;   
+   this.alunos = indvs;
    this.pessoa = {};
 
-    /*this.pessoas = this.pessoas.concat(this.individuo);
-    this.pessoas.push(this.individuo)*/
 
       this.newAluno = function (){
           alert("felipaaae0");
-          this.pessoas.push(this.pessoa);
+          this.alunos.push(this.pessoa);
           alert("felipaaae3");
-
           this.pessoa = {};
       };
 
-      this.Procura = function (pessoa){
-        return ($scope.pesqText === pessoa.idade);
+      this.newProfessor = function (){
+          alert("felipaaae0");
+          this.professores.push(this.pessoa);
+          alert("felipaaae3");
+          this.pessoa = {};
+      };
+
+      this.ProcuraProfessor = function (pessoa){
+        return ($scope.pesqText === pessoa.seap);
+      };
+      this.ProcuraAluno = function (pessoa){
+        return ($scope.pesqText === pessoa.ra);
       };
 
     });
 
-      var indv = [{nome:"jo", idade: 26}];
       var indvs = [{
           nome:"felipe",
-          idade: 22,
+          ra: 22,
         },
         {
           nome: "aosdsaio",
-          idade: 12,
+          ra: 12,
         },
         {
-          nome:"felipe",
-          idade: 145,
+          nome:"felipe123",
+          seap: 999,
         },
         {
           nome: "fel",
-          idade: 1,
+          ra: 1,
         },
         {
           nome:"aes",
-          idade: 1233,
+          ra: 1233,
         },
         {
           nome: "fas",
-          idade: 3456,
+          ra: 3456,
         },
         {
           nome:"qweqw",
-          idade: 12,
+          ra: 12,
         },
         {
           nome: "aosdadewqesaio",
-          idade: 42,
-        },
-      ];
+          ra: 42,
+        },];
 
 })();
