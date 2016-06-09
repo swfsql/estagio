@@ -69,7 +69,7 @@
           <li role="presentation">
             <form class="navbar-form" role="search">
               <div class="form-group">
-                <input type="number" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
+                <p></p><input type="number" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
 
               </div>
             </form>
@@ -89,17 +89,20 @@
 
         <!-- Importa dados-->
         <div id="importar" class="tab-pane">
-          <h3>Importar</h3>
-          <p>importar dados....</p>
-          <form>
-          <p>Escolha um arquivo XML <input type="file" name="datafile" size="40"></p>
-          <div>
-          <input type="submit" value="Enviar">
+          <p></p>
+          <div style="position:relative;">
+            <a class='btn btn-primary' href='javascript:;'>
+                Buscar arquivo
+                <input type="file" style='position:absolute;z-index:2;top:0;left:0;opacity:0;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+            </a>
+            <p></p><pre><span class="fileinput-new" id="upload-file-info">Nenhum arquivo selecionado</span></pre>
           </div>
-          </form>
+          <p></p>
+          <div>
+            <button type="button" class="btn btn-primary" style="display: inline; margin-bottom: 3px">Enviar</button>
+          </div>
         </div>
         <!-- /Importa dados-->
-
 
 
         <!-- Cadastra estagio-->
@@ -111,6 +114,7 @@
 
 
         <!-- Cadastra Aluno-->
+        <p></p>
         <div role="tabpanel" class="tab-pane panel panel-default" id="tab_aluno">
           <div class="panel-body">
             <form role="form" ng-submit='adm.newAluno(pessoa)'>
@@ -160,12 +164,13 @@
 
 
         <!-- Cadastra professor-->
+        <p></p>
         <div role="tabpanel" class="tab-pane panel panel-default" id="tab_professor">
           <div class="panel-body">
             <form role="form" ng-submit='adm.newProfessor(pessoa)'>
               <div class="form-group">
-                <label for="RA">Seap: </label>
-                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.seap' required> 
+                <label for="SEAP">Seap: </label>
+                <input class="form-control" type="number" id="SEAP" style="width: 100px" ng-model='adm.pessoa.seap' required> 
               </div>
               <div class="select-group">
                 <label for="curso">Curso: </label>
