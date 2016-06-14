@@ -66,15 +66,9 @@
 
         <!-- Busca-->
         <div id="buscar" class="tab-pane fade in active">
-          <li role="presentation">
-            <form class="navbar-form" role="search">
-              <div class="form-group">
-                <p></p><input type="number" class="form-control" placeholder="RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
-
-              </div>
+            <form class="form-group" role="search" style="width: 120px">
+                <p></p><input type="number" class="form-control" placeholder="   RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
             </form>
-          </li>
-
           <div role="tabpanel" class="tab-pane panel panel-default fade" id="tab_busca">
             <div class="panel-body" ng-repeat="pessoa in adm.professores | filter:adm.ProcuraProfessor">
                   {{pessoa.nome}} {{pessoa.email}} {{pessoa.seap}} {{pessoa.telefone}} {{pessoa.periodo}} {{pessoa.ch}} {{pessoa.curso}} 
