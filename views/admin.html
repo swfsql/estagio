@@ -1,46 +1,49 @@
 <!doctype html>
 <html ng-app = "admin">
 
-<head>
-  <title>ADMIN</title>
-  <script src= "/static/js/jquery.min.js"></script>
-  <script src= "/static/js/bootstrap.min.js"></script>
-  <script src='/static/js/angular.min.js'></script>
-  <script src='/static/js/admin.js'></script>
+  <head>
+    <title>ADMIN</title>
+    <script src= "/static/js/jquery.min.js"></script>
+    <script src= "/static/js/bootstrap.min.js"></script>
+    <script src='/static/js/angular.min.js'></script>
+    <script src='/static/js/admin.js'></script>
+    <script src="https://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>
+    
 
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
-  <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" >
-  <link href="/static/css/bootstrap.min.css" rel="stylesheet"  >
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-  <link href="/static/css/admin.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" >
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet"  >
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <link href="/static/css/admin.css" rel="stylesheet">
 
-  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 
-</head>
+  </head>
 
-<body ng-controller="AdminCtrl as adm">
+    <body ng-controller="AdminCtrl as adm">
 
-  <div class="container">
+      <div class="container">
 
-    <!-- Navigation -->
+        <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
-          <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand">Estagio UNIFEI</a>
-          </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Estagio UNIFEI</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/trocarsenha"><span class="glyphicon glyphicon-user"></span> Trocar Senha</a></li>
             <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
           </ul>
-          </div>
+        </div>
       </div>
     </nav> <!-- /Navigation -->
 
@@ -53,7 +56,7 @@
         <li><a data-toggle="pill" href="#importar">Importar dados</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastrar
-          <span class="caret"></span></a>
+            <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a data-toggle="pill" href="#tab_aluno">Aluno</a></li>
             <li><a href="#tab_professor" role="tab" data-toggle="tab">Professor</a></li>
@@ -66,15 +69,15 @@
 
         <!-- Busca-->
         <div id="buscar" class="tab-pane fade in active">
-            <form class="form-group" role="search" style="width: 120px">
-                <p></p><input type="number" class="form-control" placeholder="   RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
-            </form>
+          <form class="form-group" role="search" >
+            <p></p><input type="number" class="form-control" placeholder="   RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
+          </form>
           <div role="tabpanel" class="tab-pane panel panel-default fade" id="tab_busca">
             <div class="panel-body" ng-repeat="pessoa in adm.professores | filter:adm.ProcuraProfessor">
-                  {{pessoa.nome}} {{pessoa.email}} {{pessoa.seap}} {{pessoa.telefone}} {{pessoa.periodo}} {{pessoa.ch}} {{pessoa.curso}} 
+              {{pessoa.nome}} {{pessoa.email}} {{pessoa.seap}} {{pessoa.telefone}} {{pessoa.periodo}} {{pessoa.ch}} {{pessoa.curso}} 
             </div>          
             <div class="panel-body" ng-repeat="pessoa in adm.alunos | filter:adm.ProcuraAluno">
-                  {{pessoa.nome}} {{pessoa.email}} {{pessoa.ra}} {{pessoa.telefone}} {{pessoa.curso}} 
+              {{pessoa.nome}} {{pessoa.email}} {{pessoa.ra}} {{pessoa.telefone}} {{pessoa.curso}} 
             </div>
           </div>
         </div>
@@ -84,27 +87,198 @@
         <!-- Importa dados-->
         <div id="importar" class="tab-pane">
           <p></p>
-          <div style="position:relative;">
+          <div >
             <a class='btn btn-primary' href='javascript:;'>
-                Buscar arquivo
-                <input type="file" style='position:absolute;z-index:2;top:0;left:0;opacity:0;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+              Buscar arquivo
+              <input type="file" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
             </a>
             <p></p><pre><span class="fileinput-new" id="upload-file-info">Nenhum arquivo selecionado</span></pre>
           </div>
           <p></p>
           <div>
-            <button type="button" class="btn btn-primary" style="display: inline; margin-bottom: 3px">Enviar</button>
+            <button type="button" class="btn btn-primary" >Enviar</button>
           </div>
         </div>
         <!-- /Importa dados-->
 
 
         <!-- Cadastra estagio-->
-        <div id="tab_estagio" class="tab-pane">
-          <h3>cadastrar estagio!!</h3>
-          <p>cadastrar dados....</p>
+        <p></p>
+        <div role="tabpanel" class="tab-pane panel panel-default" id="tab_estagio">
+          <div class="panel-body">
+            <form role="form"> <!-- todo add ng-submit -->
+
+              <h4>Informacoes do aluno</h4>
+
+              <!-- todo botar tudo num form, pq talvez tenha de enviar dados -->
+
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label class="sr-only">RA</label>
+                    <input class="form-control" type="number" id="estagio_RA" placeholder="RA" ng-model='adm.pessoa.ra' required> 
+                  </div>
+                </div>
+
+                <fieldset disabled>
+                  <div class="col-xs-6">
+                    <div class="form-group">
+                      <label class="sr-only">Nome</label>
+                      <input type="text" class="form-control" id="estagio_name" placeholder="Nome" ng-model='adm.pessoa.nome' required>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <div class="form-group">
+                      <label class="sr-only">E-mail</label>
+                      <input class="form-control" type="email" id="estagio_email" placeholder="Email" ng-model='adm.pessoa.email' required/>
+                    </div>
+                  </div>
+                </fieldset>
+
+              </div>
+
+
+              <fieldset disabled>
+                <div class="row">
+                  <div class="col-xs-2">
+                    <div class="select-group">
+                      <label class="sr-only">Curso</label>
+                      <select class="form-control" ng-model='adm.pessoa.curso' required>
+                        <option value="" selected disabled>Curso</option>
+                        <option value="ECO">ECO</option>
+                        <option value="EMO">EMO</option>
+                        <option value="ECA">ECA</option>
+                        <option value="EEL">EEL</option>
+                        <option value="EPR">EPR</option>
+                        <option value="EMT">EMT</option>
+                        <option value="ESS">ESS</option>
+                        <option value="EME">EME</option>
+                        <option value="EAM">EAM</option>                
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label class="sr-only">Telefone:</label>
+                      <input class="form-control" type="tel" id="estagio_telefone" placeholder="Telefone" ng-model='adm.pessoa.telefone' required />
+                    </div>
+                  </div>
+
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <label class="sr-only">Período:</label>
+                      <input class="form-control" type="number" max="10" min="1" value="1" id="estagio_periodo" placeholder="Periodo" ng-model='adm.pessoa.periodo' required/>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <label class="sr-only">Carga horária feita:</label>
+                      <input class="form-control" type="text" id="estagio_ch" placeholder="Carga Horaria" ng-model='adm.pessoa.ch' required />
+                    </div>
+                  </div>
+                </div>
+
+              </fieldset>
+
+
+              <h4>Informacoes do professor</h4>
+
+
+
+              <div class="row">
+
+                <div class="col-xs-4">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <input type="checkbox" aria-label="...">
+                    </span>
+                    <label class="sr-only">SEAP</label>
+                    <fieldset disabled>
+                      <input class="form-control" type="number" id="estagio_SEAP" placeholder="SEAP" ng-model='adm.pessoa.seap' required> 
+                    </fieldset>
+                  </div>
+                </div>
+
+                <!-- todo as infos. do professor soh precisam serem mostradas, nao precisa ser input -->
+                <fieldset disabled>
+                  <div class="col-xs-6">
+                    <div class="form-group">
+                      <label class="sr-only">Nome</label>
+                      <input type="text" class="form-control" id="estagio_name" placeholder="Nome" ng-model='adm.pessoa.nome' required>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <h4>Informacoes do estagio</h4>
+
+              <div class="row">
+
+                <div class="col-xs-6">
+                  <div class="form-group">
+                    <label class="sr-only">Local Fisico</label>
+                    <input type="text" class="form-control" id="estagio_name" placeholder="Local Fisico" ng-model='adm.estagio.local' required>
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> Estagio obrigatorio
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+
+
+                <div class="row">
+                  <div class='col-sm-4'>
+                    <div class="form-group">
+                      <div class='input-group date' id='datepicker1'>
+                        <input type='text' class="form-control" placeholder="Data de inicio" />
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <script type="text/javascript">
+                      $(function () {
+                        $('#datepicker1').datepicker({
+                          language: 'pt-BR'
+                        });
+                      });
+                  </script>
+
+                  <div class='col-sm-4'>
+                    <div class="form-group">
+                      <div class='input-group date' id='datepicker2'>
+                        <input type='text' class="form-control" placeholder="Data de termino" />
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <script type="text/javascript">
+                      $(function () {
+                        $('#datepicker2').datepicker({
+                          language: 'pt-BR'
+                        });
+                      });
+                  </script>
+                </div>
+
+
+                <button class="btn">Enviar informações</button>
+            </form>  
+          </div>
         </div>
-        <!-- Cadastra estagio-->
+        <!-- /Cadastra Estagio-->
 
 
         <!-- Cadastra Aluno-->
@@ -112,45 +286,76 @@
         <div role="tabpanel" class="tab-pane panel panel-default" id="tab_aluno">
           <div class="panel-body">
             <form role="form" ng-submit='adm.newAluno(pessoa)'>
-              <div class="form-group">
-                <label for="RA">RA: </label>
-                <input class="form-control" type="number" id="RA" style="width: 100px" ng-model='adm.pessoa.ra' required> 
+
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label class="sr-only">RA</label>
+                    <input class="form-control" type="number" id="RA" placeholder="RA" ng-model='adm.pessoa.ra' required> 
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label class="sr-only">Nome</label>
+                    <input type="text" class="form-control" id="name" placeholder="Nome" ng-model='adm.pessoa.nome' required>
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label class="sr-only">E-mail</label>
+                    <input class="form-control" type="email" id="email" placeholder="Email" ng-model='adm.pessoa.email' required/>
+                  </div>
+                </div>
+
               </div>
-              <div class="form-group">
-                <label for="periodo">Período:</label>
-                <input class="form-control" type="number" max="10" min="1" value="1" id="periodo" style="width: 100px" ng-model='adm.pessoa.periodo' required/>
+
+
+              <div class="row">
+
+                <div class="col-xs-2">
+                  <div class="select-group">
+                    <label class="sr-only">Curso</label>
+                    <select class="form-control" ng-model='adm.pessoa.curso' required>
+                      <option value="" selected disabled>Curso</option>
+                      <option value="ECO">ECO</option>
+                      <option value="EMO">EMO</option>
+                      <option value="ECA">ECA</option>
+                      <option value="EEL">EEL</option>
+                      <option value="EPR">EPR</option>
+                      <option value="EMT">EMT</option>
+                      <option value="ESS">ESS</option>
+                      <option value="EME">EME</option>
+                      <option value="EAM">EAM</option>                
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label class="sr-only">Telefone:</label>
+                    <input class="form-control" type="tel" id="telefone" placeholder="Telefone" ng-model='adm.pessoa.telefone' required />
+                  </div>
+                </div>
+
+                <div class="col-xs-3">
+                  <div class="form-group">
+                    <label class="sr-only">Período:</label>
+                    <input class="form-control" type="number" max="10" min="1" value="1" id="periodo" placeholder="Periodo" ng-model='adm.pessoa.periodo' required/>
+                  </div>
+                </div>
+
+                <div class="col-xs-3">
+                  <div class="form-group">
+                    <label class="sr-only">Carga horária feita:</label>
+                    <input class="form-control" type="text" id="ch" placeholder="Carga Horaria" ng-model='adm.pessoa.ch' required />
+                  </div>
+                </div>
               </div>
-              <div class="select-group">
-                <label for="curso">Curso: </label>
-                <select style="display: block;" ng-model='adm.pessoa.curso' required>
-                  <option value="ECO">ECO</option>
-                  <option value="EMO">EMO</option>
-                  <option value="ECA">ECA</option>
-                  <option value="EEL">EEL</option>
-                  <option value="EPR">EPR</option>
-                  <option value="EMT">EMT</option>
-                  <option value="ESS">ESS</option>
-                  <option value="EME">EME</option>
-                  <option value="EAM">EAM</option>                
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="name">Nome:</label>
-                <input type="text" class="form-control" id="name" ng-model='adm.pessoa.nome' required>
-              </div>
-              <div class="form-group">
-                <label for="email">E-mail:</label>
-                <input class="form-control" type="email" id="email" ng-model='adm.pessoa.email' required/>
-              </div>
-              <div class="form-group">
-                <label for="tel">Telefone:</label>
-                <input class="form-control" type="tel" id="telefone" style="width: 100px" ng-model='adm.pessoa.telefone' required />
-              </div>
-              <div class="form-group">
-                <label for="ch">Carga horária feita:</label>
-                <input class="form-control" type="text" id="ch" style="width: 100px" ng-model='adm.pessoa.ch' required />
-              </div>
+
               <button class="btn">Enviar informações</button>
+
             </form>  
           </div>
         </div>
@@ -162,49 +367,74 @@
         <div role="tabpanel" class="tab-pane panel panel-default" id="tab_professor">
           <div class="panel-body">
             <form role="form" ng-submit='adm.newProfessor(pessoa)'>
-              <div class="form-group">
-                <label for="SEAP">Seap: </label>
-                <input class="form-control" type="number" id="SEAP" style="width: 100px" ng-model='adm.pessoa.seap' required> 
+
+
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label class="sr-only">SEAP</label>
+                    <input class="form-control" type="number" id="SEAP" placeholder="SEAP" ng-model='adm.pessoa.seap' required> 
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label class="sr-only">Nome</label>
+                    <input type="text" class="form-control" id="name" placeholder="Nome" ng-model='adm.pessoa.nome' required>
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label class="sr-only">E-mail</label>
+                    <input class="form-control" type="email" id="email" placeholder="Email" ng-model='adm.pessoa.email' required/>
+                  </div>
+                </div>
+
               </div>
-              <div class="select-group">
-                <label for="curso">Curso: </label>
-                <select style="display: block;" ng-model='adm.pessoa.curso' required>
-                  <option value="ECO">ECO</option>
-                  <option value="EMO">EMO</option>
-                  <option value="ECA">ECA</option>
-                  <option value="EEL">EEL</option>
-                  <option value="EPR">EPR</option>
-                  <option value="EMT">EMT</option>
-                  <option value="ESS">ESS</option>
-                  <option value="EME">EME</option>
-                  <option value="EAM">EAM</option>
-                </select>
+
+              <div class="row">
+                <div class="col-xs-2">
+                  <div class="select-group">
+                    <label class="sr-only">Curso</label>
+                    <select class="form-control" ng-model='adm.pessoa.curso' required>
+                      <option value="" selected disabled>Curso</option>
+                      <option value="ECO">ECO</option>
+                      <option value="EMO">EMO</option>
+                      <option value="ECA">ECA</option>
+                      <option value="EEL">EEL</option>
+                      <option value="EPR">EPR</option>
+                      <option value="EMT">EMT</option>
+                      <option value="ESS">ESS</option>
+                      <option value="EME">EME</option>
+                      <option value="EAM">EAM</option>                
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label class="sr-only">Telefone:</label>
+                    <input class="form-control" type="tel" id="telefone" placeholder="Telefone" ng-model='adm.pessoa.telefone' required />
+                  </div>
+                </div>
+
               </div>
-              <div class="form-group">
-                <label for="name">Nome:</label>
-                <input type="text" class="form-control" id="name" ng-model='adm.pessoa.nome' required>
-              </div>
-              <div class="form-group">
-                <label for="email">E-mail:</label>
-                <input class="form-control" type="email" id="email" ng-model='adm.pessoa.email' required/>
-              </div>
-              <div class="form-group">
-                <label for="tel">Telefone:</label>
-                <input class="form-control" type="tel" id="telefone" style="width: 100px" ng-model='adm.pessoa.telefone' required />
-              </div>
+
+
               <button class="btn" >Enviar informações</button>
             </form>
           </div>
         </div>
         <!-- /Cadastra professor-->
 
+      </div>
+
     </div>
 
-  </div>
+    <footer class="footer">
+      <p>&copy; IHC-Grupo 1, Inc.</p>
+    </footer>
 
-  <footer class="footer">
-    <p>&copy; IHC-Grupo 1, Inc.</p>
-  </footer>
-
-</body>
+    </body>
 </html>
