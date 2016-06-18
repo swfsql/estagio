@@ -35,3 +35,23 @@ func (this *AdminController) Get() {
 	this.All()
 	this.Render()
 }
+
+func (this *AdminController) AdiquirirDados() {
+	sess := this.StartSession()
+	conta := sess.Get("conta").(models.Conta)
+
+	switch conta.Pessoa.Privilegio {
+	case 5:
+		 alunos, _ := models.GetAlunos()
+		 professores, _:= models.GetProfessores()
+		dado := struct{ Alunos []*models.Aluno; Professores []*models.Professor}{alunos, professores}
+		this.Data["json"] = dado
+		this.ServeJSON()
+		break
+	default:
+		this.Redirect("/", 302)
+		return
+	}
+
+
+}

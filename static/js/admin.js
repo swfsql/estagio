@@ -10,9 +10,9 @@
   var app = angular.module('admin', [ ]);  
 
    app.controller('AdminCtrl', function($scope, $http, $window) { 
-   this.professores = indvs;   
-   this.alunos = indvs;
-   this.pessoa = {};
+   $scope.professores = [];   
+   $scope.alunos = [];
+   $scope.pessoa = {};
 
 
       this.newAluno = function (){
@@ -29,48 +29,25 @@
           this.pessoa = {};
       };
 
-      this.ProcuraProfessor = function (pessoa){
+      this.ProcuraProfessor = function (professor){
         if($scope.pesqText > 0)
-        return ($scope.pesqText === pessoa.seap);
+        return ($scope.pesqText === professor.Seap);
       };
-      this.ProcuraAluno = function (pessoa){
+      this.ProcuraAluno = function (aluno){
         if($scope.pesqText > 0)
-        return ($scope.pesqText === pessoa.ra);
+        return ($scope.pesqText === aluno.Ra);
       };
 
+      this.refresh = function() {
+        return $http.get('/nucleo/getdados').
+          success(function(data) { 
+            $scope.alunos = data.Alunos; 
+            $scope.professores = data.Professores;
+            //console.log(this.alunos);
+           })
+          //error(logError);
+      };
+      this.refresh();
     });
-
-      var indvs = [{
-          nome:"felipe",
-          ra: 22,
-        },
-        {
-          nome: "aosdsaio",
-          ra: 12,
-        },
-        {
-          nome:"felipe123",
-          seap: 999,
-        },
-        {
-          nome: "fel",
-          ra: 1,
-        },
-        {
-          nome:"aes",
-          ra: 1233,
-        },
-        {
-          nome: "fas",
-          ra: 3456,
-        },
-        {
-          nome:"qweqw",
-          ra: 12,
-        },
-        {
-          nome: "aosdadewqesaio",
-          ra: 42,
-        },];
 
 })();

@@ -73,11 +73,13 @@
             <p></p><input type="number" class="form-control" placeholder="   RA / SEAP" href="#tab_busca" aria-controls="messages" role="tab" data-toggle="tab" ng-model='pesqText'>
           </form>
           <div role="tabpanel" class="tab-pane panel panel-default fade" id="tab_busca">
-            <div class="panel-body" ng-repeat="pessoa in adm.professores | filter:adm.ProcuraProfessor">
-              {{pessoa.nome}} {{pessoa.email}} {{pessoa.seap}} {{pessoa.telefone}} {{pessoa.periodo}} {{pessoa.ch}} {{pessoa.curso}} 
+            <div class="panel-body" ng-repeat="professor in adm.professores | filter:adm.ProcuraProfessor">
+              {{professor.nome}} {{professor.email}} {{professor.seap}} {{professor.telefone}} {{professor.periodo}} {{professor.ch}} {{professor.curso}} 
             </div>          
-            <div class="panel-body" ng-repeat="pessoa in adm.alunos | filter:adm.ProcuraAluno">
-              {{pessoa.nome}} {{pessoa.email}} {{pessoa.ra}} {{pessoa.telefone}} {{pessoa.curso}} 
+            <div class="panel-body" ng-repeat="aluno in alunos | filter:adm.ProcuraAluno">
+              {{aluno.Conta.Pessoa.Nome}} {{aluno.Conta.Pessoa.Email}} {{aluno.Ra}} {{aluno.Conta.Pessoa.Telefone}} {{aluno.Curso.Nome}} 
+              <a href="/discente/{{aluno.Id}}"> gerson xupa penis</a>
+              
             </div>
           </div>
         </div>

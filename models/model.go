@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 	"fmt"
+	//"reflect"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -45,7 +46,7 @@ func (s Pessoa) String() string {
 type Aluno struct {
 	Id           uint64
 	Conta        *Conta `orm:"rel(fk)"`
-	Ra           uint64 `64orm:"unique"`
+	Ra           uint64 `orm:"unique"`
 	Curso        *Curso `orm:"rel(fk)"`
 	Periodo      uint64
 	CargaHoraria uint64
@@ -177,8 +178,89 @@ func GetProfessores() (professores []*Professor, err error) {
 
 func GetAlunos() (alunos []*Aluno, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable("aluno")
+
+	qs := o.QueryTable("aluno").RelatedSel("curso").RelatedSel("conta")
 	_, err = qs.All(&alunos)
+
+	for i, a := range alunos {
+		pessoa := &Pessoa{}
+		o.Read(pessoa) 
+		err = o.QueryTable("pessoa").Filter("id", a.Conta.Pessoa.Id).Limit(1).One(pessoa)
+		alunos[i].Conta.Pessoa = pessoa;
+		alunos[i].Conta.Senha = ""
+		alunos[i].Conta.Usuario = ""
+
+	}
+
+
+	//qs := o.QueryTable("aluno").RelatedSel("curso").RelatedSel("conta").RelatedSel("conta__pessoa")
+    //_, err = qs.All(&alunos)
+	
+
+
+	
+	/*qs := o.QueryTable("aluno")
+	num, err := qs.Values(&maps, "id", "ra","curso__nome", "curso__sigla","periodo","cargahoraria","conta__pessoa__nome", "conta__pessoa__telefone","conta__pessoa__email")
+	alunos = make([]*Aluno, num)
+	fmt.Println("huhuhu")
+	fmt.Println(err)
+	if err == nil {
+		fmt.Println("hueuhebr")
+		for i, m := range maps {
+			//fmt.Println(m)
+			//fmt.Println("varias linhas")
+			//fmt.Println(reflect.TypeOf(m["id"]))
+			aluno := &Aluno{}
+
+			switch v := m["id"].(type) {
+			case uint64:
+				aluno.Id = v;
+			} 
+			switch v := m["ra"].(type) {
+			case uint64:
+				aluno.Ra = v;
+			} 
+			switch v := m["periodo"].(type) {
+			case uint64:
+				aluno.Periodo = v;
+			} 
+			switch v := m["cargahoraria"].(type) {
+			case uint64:
+				aluno.CargaHoraria = v;
+			} 
+			//aluno.Id = m["id"].(uint64);
+				//Id: m["id"].(nil), Ra: m["ra"].(uint64), Periodo: m["periodo"].(uint64), CargaHoraria: m["cargahoraria"].(uint64)}
+			aluno.Curso = &Curso{}
+			switch v := m["curso__nome"].(type) {
+			case string:
+				aluno.Curso.Nome = v;
+			}
+			switch v := m["curso__sigla"].(type) {
+			case string:
+				aluno.Curso.Sigla = v;
+			}
+			//Nome: m["curso__nome"].(string), Sigla: m["curso__sigla"].(string)
+			aluno.Conta = &Conta{}
+			aluno.Conta.Pessoa = &Pessoa{}
+			switch v := m["conta__pessoa__nome"].(type) {
+			case string:
+				aluno.Conta.Pessoa.Nome = v;
+			}
+			switch v := m["conta__pessoa__telefone"].(type) {
+			case string:
+				aluno.Conta.Pessoa.Telefone = v;
+			}
+			switch v := m["conta__pessoa__email"].(type) {
+			case string:
+				aluno.Conta.Pessoa.Email = v;
+			}
+			//Nome: m["conta__pessoa__nome"].(string), Telefone: m["conta__pessoa__telefone"].(string), Email: m["conta__pessoa__email"].(string)
+			alunos[i] = aluno
+			fmt.Println(alunos[i])
+		}
+	}*/
+
+	//_, err = qs.All(&alunos)
 	return
 }
 
@@ -188,3 +270,27 @@ func GetEstagios() (estagios []*Estagio, err error) {
 	_, err = qs.All(&estagios)
 	return
 }
+
+	/*//aluno
+	Id           uint64
+	Conta        *Conta `orm:"rel(fk)"`
+	Ra           uint64 `64orm:"unique"`
+	Curso        *Curso `orm:"rel(fk)"`
+	Periodo      uint64
+	CargaHoraria uint64
+
+	//pessoa
+	Id         uint64
+	Conta      *Conta `orm:"null;reverse(one)"`
+	Nome       string
+	Telefone   string `orm:"null"`
+	Email      string `orm:"unique"`
+	Privilegio uint32 // 0-supervisor/anonimo 1-aluno 2-professor 3-coord-curso 4-admin
+
+
+type Conta struct {
+	Id      uint64
+	Pessoa  *Pessoa `orm:"rel(one)"`
+	Usuario string
+	Senha   string `orm:"null"`
+}*/
