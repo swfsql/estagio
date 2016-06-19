@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	//"reflect"
-
 	"github.com/astaxie/beego/orm"
 )
 
@@ -12,6 +11,15 @@ import (
 var (
 	ErrNoRows = errors.New("<QuerySeter> no row found")
 )
+
+func init() {
+	orm.RegisterDriver("mysql", orm.DRMySQL)
+	orm.RegisterDataBase("default", "mysql", "root:estagio123@/my_db?charset=utf8", 30)
+	orm.RegisterModel(new(Conta), new(Pessoa), new(Curso), new(Aluno), new(Professor), new(Estagio), new(Documento), new(Estagio_Documento))
+	orm.RunSyncdb("default", true, true)
+	//orm.Debug = true
+	CriarDados()
+}
 
 type Conta struct {
 	Id      uint64
@@ -52,15 +60,31 @@ type Aluno struct {
 	CargaHoraria uint64
 }
 
+func (s Aluno) String() string {
+	return fmt.Sprintf("(aluno .Id: %d, .Conta: (conta), .Ra: %d, .Curso: (curso), .Periodo: %d, .CargaHoraria: %d)", s.Id, s.Ra, s.Periodo, s.CargaHoraria)
+}
 func GetAlunoByContaId(conta_id uint64) (aluno Aluno, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable("aluno")
 	err = qs.Filter("Conta", conta_id).RelatedSel().One(&aluno)
 	return
 }
-
-func (s Aluno) String() string {
-	return fmt.Sprintf("(aluno .Id: %d, .Conta: (conta), .Ra: %d, .Curso: (curso), .Periodo: %d, .CargaHoraria: %d)", s.Id, s.Ra, s.Periodo, s.CargaHoraria)
+func GetAlunoByRa(ra uint64) (aluno Aluno, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable("aluno")
+	err = qs.Filter("Ra", ra).RelatedSel().One(&aluno)
+	if err == orm.ErrNoRows {
+		err = ErrNoRows
+	}
+	return
+}
+func CadastroAluno(aluno *Aluno) {
+	o := orm.NewOrm()
+	o.Insert(aluno.Conta.Pessoa)
+	o.Insert(aluno.Conta)
+	o.Insert(aluno)
+	//o.Insert(&Aluno{Conta: aluno.Conta, Curso: cursos[i%2], Ra: uint64(i)})
+	//	o.Insert(aluno)
 }
 
 type Professor struct {
@@ -127,14 +151,28 @@ type Curso struct {
 }
 
 func (s Curso) String() string {
-	return fmt.Sprintf("(curso .Id: %d, .Nome: %s, .CHObrigatoria: %d, .CHNObrigatoria: %d, .PeriodoNObrigatorio: %d, .PeriodoObrigatorio: %d)", s.Id, s.Nome, s.CHObrigatoria, s.CHNObrigatoria, s.PeriodoNObrigatorio, s.PeriodoObrigatorio)
+	return fmt.Sprintf("(curso .Id: %d, .Nome: %s, .Sigla: %s, .CHObrigatoria: %d, .CHNObrigatoria: %d, .PeriodoNObrigatorio: %d, .PeriodoObrigatorio: %d)", s.Id, s.Nome, s.Sigla, s.CHObrigatoria, s.CHNObrigatoria, s.PeriodoNObrigatorio, s.PeriodoObrigatorio)
 }
-
-func init() {
-	orm.RegisterDriver("mysql", orm.DRMySQL)
-	orm.RegisterDataBase("default", "mysql", "root:estagio123@/my_db?charset=utf8", 30)
-	orm.RegisterModel(new(Conta), new(Pessoa), new(Curso), new(Aluno), new(Professor), new(Estagio), new(Documento), new(Estagio_Documento))
-	orm.RunSyncdb("default", true, true)
+func GetCursoBySigla(sigla string) (curso Curso, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable("curso")
+	err = qs.Filter("Sigla", sigla).RelatedSel().One(&curso)
+	if err == orm.ErrNoRows {
+		err = ErrNoRows
+	}
+	return
+}
+func GetCursosSiglas() (siglas []string, err error) {
+	o := orm.NewOrm()
+	var list []orm.ParamsList
+	num, err := o.QueryTable("curso").ValuesList(&list, "sigla")
+	siglas = make([]string, num)
+	if err == nil {
+		for i, v := range list {
+			siglas[i] = v[0].(string)
+		}
+	}
+	return
 }
 
 func (p *Professor) GetEstagios() (estagios []*Estagio, err error) {
@@ -184,83 +222,17 @@ func GetAlunos() (alunos []*Aluno, err error) {
 
 	for i, a := range alunos {
 		pessoa := &Pessoa{}
-		o.Read(pessoa) 
+		o.Read(pessoa)
 		err = o.QueryTable("pessoa").Filter("id", a.Conta.Pessoa.Id).Limit(1).One(pessoa)
-		alunos[i].Conta.Pessoa = pessoa;
+		alunos[i].Conta.Pessoa = pessoa
 		alunos[i].Conta.Senha = ""
 		alunos[i].Conta.Usuario = ""
 
 	}
 
+	fmt.Println("alunos:")
+	fmt.Println(alunos)
 
-	//qs := o.QueryTable("aluno").RelatedSel("curso").RelatedSel("conta").RelatedSel("conta__pessoa")
-    //_, err = qs.All(&alunos)
-	
-
-
-	
-	/*qs := o.QueryTable("aluno")
-	num, err := qs.Values(&maps, "id", "ra","curso__nome", "curso__sigla","periodo","cargahoraria","conta__pessoa__nome", "conta__pessoa__telefone","conta__pessoa__email")
-	alunos = make([]*Aluno, num)
-	fmt.Println("huhuhu")
-	fmt.Println(err)
-	if err == nil {
-		fmt.Println("hueuhebr")
-		for i, m := range maps {
-			//fmt.Println(m)
-			//fmt.Println("varias linhas")
-			//fmt.Println(reflect.TypeOf(m["id"]))
-			aluno := &Aluno{}
-
-			switch v := m["id"].(type) {
-			case uint64:
-				aluno.Id = v;
-			} 
-			switch v := m["ra"].(type) {
-			case uint64:
-				aluno.Ra = v;
-			} 
-			switch v := m["periodo"].(type) {
-			case uint64:
-				aluno.Periodo = v;
-			} 
-			switch v := m["cargahoraria"].(type) {
-			case uint64:
-				aluno.CargaHoraria = v;
-			} 
-			//aluno.Id = m["id"].(uint64);
-				//Id: m["id"].(nil), Ra: m["ra"].(uint64), Periodo: m["periodo"].(uint64), CargaHoraria: m["cargahoraria"].(uint64)}
-			aluno.Curso = &Curso{}
-			switch v := m["curso__nome"].(type) {
-			case string:
-				aluno.Curso.Nome = v;
-			}
-			switch v := m["curso__sigla"].(type) {
-			case string:
-				aluno.Curso.Sigla = v;
-			}
-			//Nome: m["curso__nome"].(string), Sigla: m["curso__sigla"].(string)
-			aluno.Conta = &Conta{}
-			aluno.Conta.Pessoa = &Pessoa{}
-			switch v := m["conta__pessoa__nome"].(type) {
-			case string:
-				aluno.Conta.Pessoa.Nome = v;
-			}
-			switch v := m["conta__pessoa__telefone"].(type) {
-			case string:
-				aluno.Conta.Pessoa.Telefone = v;
-			}
-			switch v := m["conta__pessoa__email"].(type) {
-			case string:
-				aluno.Conta.Pessoa.Email = v;
-			}
-			//Nome: m["conta__pessoa__nome"].(string), Telefone: m["conta__pessoa__telefone"].(string), Email: m["conta__pessoa__email"].(string)
-			alunos[i] = aluno
-			fmt.Println(alunos[i])
-		}
-	}*/
-
-	//_, err = qs.All(&alunos)
 	return
 }
 
@@ -270,27 +242,3 @@ func GetEstagios() (estagios []*Estagio, err error) {
 	_, err = qs.All(&estagios)
 	return
 }
-
-	/*//aluno
-	Id           uint64
-	Conta        *Conta `orm:"rel(fk)"`
-	Ra           uint64 `64orm:"unique"`
-	Curso        *Curso `orm:"rel(fk)"`
-	Periodo      uint64
-	CargaHoraria uint64
-
-	//pessoa
-	Id         uint64
-	Conta      *Conta `orm:"null;reverse(one)"`
-	Nome       string
-	Telefone   string `orm:"null"`
-	Email      string `orm:"unique"`
-	Privilegio uint32 // 0-supervisor/anonimo 1-aluno 2-professor 3-coord-curso 4-admin
-
-
-type Conta struct {
-	Id      uint64
-	Pessoa  *Pessoa `orm:"rel(one)"`
-	Usuario string
-	Senha   string `orm:"null"`
-}*/

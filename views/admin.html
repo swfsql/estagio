@@ -148,15 +148,9 @@
                       <label class="sr-only">Curso</label>
                       <select class="form-control" ng-model='adm.pessoa.curso' required>
                         <option value="" selected disabled>Curso</option>
-                        <option value="ECO">ECO</option>
-                        <option value="EMO">EMO</option>
-                        <option value="ECA">ECA</option>
-                        <option value="EEL">EEL</option>
-                        <option value="EPR">EPR</option>
-                        <option value="EMT">EMT</option>
-                        <option value="ESS">ESS</option>
-                        <option value="EME">EME</option>
-                        <option value="EAM">EAM</option>                
+                        <<<range $i, $c := .CursosSiglas>>>
+                        <option value="<<<$c>>>"><<<$c>>></option>
+                        <<<end>>>
                       </select>
                     </div>
                   </div>
@@ -321,15 +315,9 @@
                     <label class="sr-only">Curso</label>
                     <select class="form-control" ng-model='adm.pessoa.curso' required>
                       <option value="" selected disabled>Curso</option>
-                      <option value="ECO">ECO</option>
-                      <option value="EMO">EMO</option>
-                      <option value="ECA">ECA</option>
-                      <option value="EEL">EEL</option>
-                      <option value="EPR">EPR</option>
-                      <option value="EMT">EMT</option>
-                      <option value="ESS">ESS</option>
-                      <option value="EME">EME</option>
-                      <option value="EAM">EAM</option>                
+                        <<<range $i, $c := .CursosSiglas>>>
+                        <option value="<<<$c>>>"><<<$c>>></option>
+                        <<<end>>>
                     </select>
                   </div>
                 </div>
@@ -351,13 +339,12 @@
                 <div class="col-xs-3">
                   <div class="form-group">
                     <label class="sr-only">Carga horária feita:</label>
-                    <input class="form-control" type="text" id="ch" placeholder="Carga Horaria" ng-model='adm.pessoa.ch' required />
+                    <input class="form-control" type="number" id="ch" placeholder="Carga Horaria" ng-model='adm.pessoa.ch' required />
                   </div>
                 </div>
               </div>
 
               <button class="btn">Enviar informações</button>
-
             </form>  
           </div>
         </div>
@@ -401,15 +388,9 @@
                     <label class="sr-only">Curso</label>
                     <select class="form-control" ng-model='adm.pessoa.curso' required>
                       <option value="" selected disabled>Curso</option>
-                      <option value="ECO">ECO</option>
-                      <option value="EMO">EMO</option>
-                      <option value="ECA">ECA</option>
-                      <option value="EEL">EEL</option>
-                      <option value="EPR">EPR</option>
-                      <option value="EMT">EMT</option>
-                      <option value="ESS">ESS</option>
-                      <option value="EME">EME</option>
-                      <option value="EAM">EAM</option>                
+                        <<<range $i, $c := .CursosSiglas>>>
+                        <option value="<<<$c>>>"><<<$c>>></option>
+                        <<<end>>>
                     </select>
                   </div>
                 </div>
