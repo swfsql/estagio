@@ -53,7 +53,6 @@
 
       <ul class="nav nav-pills nav-justified">
         <li class="active"><a data-toggle="pill" href="#buscar">Buscar</a></li>
-        <li><a data-toggle="pill" href="#importar">Importar dados</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastrar
             <span class="caret"></span></a>
@@ -63,6 +62,7 @@
             <li><a href="#tab_estagio" role="tab" data-toggle="tab">Estagio</a></li>
           </ul>
         </li>
+        <li><a data-toggle="pill" href="#importar">Importar dados</a></li>
       </ul>
 
       <div class="tab-content">
@@ -89,10 +89,10 @@
         <!-- Importa dados-->
         <div id="importar" class="tab-pane">
           <p></p>
-          <div >
+          <div style="position:relative;">
             <a class='btn btn-primary' href='javascript:;'>
               Buscar arquivo
-              <input type="file" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+              <input type="file" style="position:absolute;z-index:2;top:0;left:0;opacity:0;color:transparent;" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
             </a>
             <p></p><pre><span class="fileinput-new" id="upload-file-info">Nenhum arquivo selecionado</span></pre>
           </div>
