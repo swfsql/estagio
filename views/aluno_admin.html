@@ -49,6 +49,14 @@
       <p>Bem vindo <<<.Usuario.Nome>>>, selecione o estagio desejado e veja todas as informações disponíveis, atente-se tambem aos alertas para não esquecer de entregar nenhum documento.</p>
     </div>
 
+    <div id ="bemvindo" class="jumbotron">
+      <p>Informações do aluno:</p>
+      <p> Nome: <<<.Aluno.Conta.Pessoa.Nome>>></p>
+      <p> RA: <<<.Aluno.Ra>>></p>
+      <p> Curso: <<<.Aluno.Curso.Nome>>></p>
+      <p> Email: <<<.Aluno.Conta.Pessoa.Email>>></p>
+    </div>
+
     <div class="jumbotron">
       <div class="estagios">
         <h3>Estagios</h3>
@@ -64,8 +72,8 @@
             <div id="collapse<<<$i>>>" class="panel-collapse collapse">
               <ul class="list-group">
                 <li class="list-group-item"><a href="/estagio/<<<$e.Id>>>">Mais Detalhes</a></li>
-                <li class="list-group-item">Professor: <<<$e.Professor>>></li>
-                <li class="list-group-item">Local Fisico: <<<$e.LocalFis>>></li>
+                <li class="list-group-item">Professor: <<<$e.Professor.Conta.Pessoa.Nome>>></li>
+                <li class="list-group-item">Email: <<<$e.Professor.Conta.Pessoa.Email>>></li>
                 <li class="list-group-item">Obrigatoriedade: <<<$e.Obrigatoriedade>>></li>
                 <li class="list-group-item">Data Inicio: <<<$e.DataInicio>>></li>
                 <li class="list-group-item">Data Fim: <<<$e.DataFim>>></li>

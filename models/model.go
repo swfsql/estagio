@@ -207,6 +207,11 @@ func (a *Aluno) GetEstagios() (estagios []*Estagio, err error) {
 	qs := o.QueryTable("estagio")
 	_, err = qs.Filter("Aluno", a.Id).RelatedSel().All(&estagios)
 
+	for _, e := range estagios {
+		professor, _ := GetProfessorByContaId(e.Professor.Conta.Id)
+		e.Professor = &professor
+	}
+
 	/*for _, estagio := range estagios {
 		fmt.Printf("Id: %d, ", estagio.Id, estagio.Aluno, estagio.Professor)
 	}*/
