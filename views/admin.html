@@ -9,7 +9,7 @@
     <script src='/static/js/admin.js'></script>
     <script src="https://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="https://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>
-    
+
 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
@@ -74,12 +74,12 @@
           </form>
           <div role="tabpanel" class="tab-pane panel panel-default fade" id="tab_busca">
             <div class="panel-body" ng-repeat="professor in adm.professores | filter:adm.ProcuraProfessor">
-              {{professor.nome}} {{professor.email}} {{professor.seap}} {{professor.telefone}} {{professor.periodo}} {{professor.ch}} {{professor.curso}} 
-            </div>          
+              {{professor.nome}} {{professor.email}} {{professor.seap}} {{professor.telefone}} {{professor.periodo}} {{professor.ch}} {{professor.curso}}
+            </div>
             <div class="panel-body" ng-repeat="aluno in alunos | filter:adm.ProcuraAluno">
-              {{aluno.Conta.Pessoa.Nome}} {{aluno.Conta.Pessoa.Email}} {{aluno.Ra}} {{aluno.Conta.Pessoa.Telefone}} {{aluno.Curso.Nome}} 
-              <a href="/discente/{{aluno.Id}}"> gerson xupa penis</a>
-              
+              {{aluno.Conta.Pessoa.Nome}} {{aluno.Conta.Pessoa.Email}} {{aluno.Ra}} {{aluno.Conta.Pessoa.Telefone}} {{aluno.Curso.Nome}}
+              <a href="/discente/{{aluno.Id}}"> detalhes</a>
+
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
                 <div class="col-xs-4">
                   <div class="form-group">
                     <label class="sr-only">RA</label>
-                    <input class="form-control" type="number" id="estagio_RA" placeholder="RA" ng-model='adm.pessoa.ra' required> 
+                    <input class="form-control" type="number" id="estagio_RA" placeholder="RA" ng-model='adm.pessoa.ra' required>
                   </div>
                 </div>
 
@@ -193,7 +193,7 @@
                     </span>
                     <label class="sr-only">SEAP</label>
                     <fieldset disabled>
-                      <input class="form-control" type="number" id="estagio_SEAP" placeholder="SEAP" ng-model='adm.pessoa.seap' required> 
+                      <input class="form-control" type="number" id="estagio_SEAP" placeholder="SEAP" ng-model='adm.pessoa.seap' required>
                     </fieldset>
                   </div>
                 </div>
@@ -271,7 +271,7 @@
 
 
                 <button class="btn">Enviar informações</button>
-            </form>  
+            </form>
           </div>
         </div>
         <!-- /Cadastra Estagio-->
@@ -287,7 +287,7 @@
                 <div class="col-xs-4">
                   <div class="form-group">
                     <label class="sr-only">RA</label>
-                    <input class="form-control" type="number" id="RA" placeholder="RA" ng-model='adm.pessoa.ra' required> 
+                    <input class="form-control" type="number" id="RA" placeholder="RA" ng-model='adm.pessoa.ra' required>
                   </div>
                 </div>
 
@@ -345,7 +345,7 @@
               </div>
 
               <button class="btn">Enviar informações</button>
-            </form>  
+            </form>
           </div>
         </div>
         <!-- /Cadastra Aluno-->
@@ -362,7 +362,7 @@
                 <div class="col-xs-4">
                   <div class="form-group">
                     <label class="sr-only">SEAP</label>
-                    <input class="form-control" type="number" id="SEAP" placeholder="SEAP" ng-model='adm.pessoa.seap' required> 
+                    <input class="form-control" type="number" id="SEAP" placeholder="SEAP" ng-model='adm.pessoa.seap' required>
                   </div>
                 </div>
 

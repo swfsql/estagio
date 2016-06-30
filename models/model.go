@@ -69,6 +69,12 @@ func GetAlunoByContaId(conta_id uint64) (aluno Aluno, err error) {
 	err = qs.Filter("Conta", conta_id).RelatedSel().One(&aluno)
 	return
 }
+func GetAlunoByAlunoId(aluno_id uint64) (aluno Aluno, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable("aluno")
+	err = qs.Filter("Id", aluno_id).RelatedSel().One(&aluno)
+	return
+}
 func GetAlunoByRa(ra uint64) (aluno Aluno, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable("aluno")

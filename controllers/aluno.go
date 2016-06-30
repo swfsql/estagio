@@ -38,8 +38,17 @@ func (this *AlunoController) Get() {
 		this.Redirect("/", 302)
 		break
 	case 5: // admin
-		this.Redirect("/", 302)
+		//this.Redirect("/", 302)
+
+		//alunos, _ := models.GetAlunos()
+		//	alunoIndice := aluno_id
+		aluno, _ := models.GetAlunoByAlunoId(aluno_id)
+		estagios, _ := aluno.GetEstagios()
 		this.TplName = "aluno_admin.html"
+		this.Data["Aluno"] = aluno
+		this.Data["Curso"] = aluno.Curso
+		this.Data["Estagios"] = estagios
+
 		break
 	}
 
